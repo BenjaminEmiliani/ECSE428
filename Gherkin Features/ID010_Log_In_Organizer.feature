@@ -4,6 +4,7 @@ Feature: Log in as an organizer
 
 As an organizer, I want to be able to log into my account in the application 
 with my username or email, and password
+so that I can access my home page
 
 
 #Normal Flow
