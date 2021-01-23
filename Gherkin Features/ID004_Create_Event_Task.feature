@@ -1,5 +1,5 @@
 # Matt Langshur feature ID004 | ECSE 428
-Feature: Organizer Create Event Tasks
+Feature: Create Event Task
 
     As an organizer, I would like to be able to add/create tasks for an event
     Tasks are individual jobs / tasks that volunteers and/or organizers need to be assigned to for an event
