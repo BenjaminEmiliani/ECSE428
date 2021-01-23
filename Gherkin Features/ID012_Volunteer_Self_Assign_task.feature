@@ -7,7 +7,7 @@ As a Volunteer, I would like to assign myself to a task in an event so that I ca
 Scenario Outline: Pick A Task Offered In An Event (Normal Flow)
 
 Given I am registered as user Volunteer
-And I have chosen event FoodDrive
+And the event FoodDrive exists
 And the tasks have been initialized
 When the task Courier has been selected
 Then I should see the task Courier in my calandar
@@ -15,7 +15,7 @@ Then I should see the task Courier in my calandar
 Scenario Outline: Pick Sevral Non-Conficting Tasks Offered In An Event (Alternate Flow)
 
 Given I am registered as user Volunteer
-And I have chosen event HomelessShelter
+And the event HomelessShelter exists
 And the tasks have been initialized
 When the following tasks are requested
 	|Task		|Start time		|End time		|
@@ -27,7 +27,7 @@ Then I should see the tasks Janitor, Cafeteria, and Laundry in my calandar
 Scenario Outline: Pick Sevral Time-Conficting Tasks Offered In An Event (Error Flow)
 
 Given I am registered as user Volunteer
-And I have chosen event OldFolksHome
+And the event OldFolksHome exists
 And the tasks have been initialized
 When the following tasks are requested
 	|Task		|Start time		|End time		|
