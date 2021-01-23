@@ -3,7 +3,7 @@
 Feature: Log in as an organizer
 
 As an organizer, I want to be able to log into my account in the application 
-with my username and password
+with my username or email, and password
 
 
 #Normal Flow
@@ -18,7 +18,7 @@ Scenario: Log in successfully with username
 #Alternate Flow
 Scenario: Log in successfully with email address
 	Given I (an organizer) have an account
-	When my email address "organizer@email.com" is entered
+	When my email address "validOrganizer@email.com" is entered
 	And my password "validPassword" is entered
 	Then I log in successully
 	And I am sent to my home page
@@ -39,3 +39,12 @@ Scenario: Log in with incorret password
 	And password "invalidPassword" is entered
 	Then I cannot log in
 	And I get an "invalid password" message
+	
+
+#Error flow
+Scenario: Log in with incorret email address
+	Given I (an organizer) have an account
+	When email address "invalidOrganizer@email.com" is entered
+	And password "validPassword" is entered
+	Then I cannot log in
+	And I get an "invalid email address" message
