@@ -7,13 +7,21 @@ with my username and password
 
 
 #Normal Flow
-Scenario: Log in successfully
+Scenario: Log in successfully with username
 	Given I (an organizer) have an account
 	When my username "validOrganizer" is entered
 	And my password "validPassword" is entered
 	Then I log in successully
 	And I am sent to my home page
 	
+	
+#Alternate Flow
+Scenario: Log in successfully with email address
+	Given I (an organizer) have an account
+	When my email address "organizer@email.com" is entered
+	And my password "validPassword" is entered
+	Then I log in successully
+	And I am sent to my home page
 
 #Error flow
 Scenario: Log in with incorrect username
