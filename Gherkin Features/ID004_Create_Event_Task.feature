@@ -17,7 +17,7 @@ Examples:
 | New Task   |
 | NewTask2   |
 
-Scenario Outline: Create Task with Title and Description (Alternate Flow)
+Scenario: Create Task with Title and Description (Alternate Flow)
 
 Given Organizer is logged into the Event Registration system
 Given an event "NewEvent" exists
@@ -26,7 +26,7 @@ When requesting the creation of task NewTask with description "This is a new tas
 Then task NewTask is created with descripion "This is a new task" for event "NewEvent"
 
 
-Scenario Outline: Attempt to Create a Duplicate Task (Error Flow)
+Scenario: Attempt to Create a Duplicate Task (Error Flow)
 
 Given Organizer is logged into the Event Registration system
 Given an event "NewEvent" exists 
@@ -36,7 +36,7 @@ When requesting the creation of task ExistingTask for event "NewEvent"
 Then a "Task already exists" error message is issued 
 And only 1 ExistingTask task exists for event "NewEvent"
 
-Scenario Outline: Attempt to Create a Task as a Volunteer (Error Flow)
+Scenario: Attempt to Create a Task as a Volunteer (Error Flow)
 
 Given Volunteer is logged into the Event Registration system
 Given an event "NewEvent" exists 
