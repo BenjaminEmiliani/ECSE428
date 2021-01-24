@@ -7,44 +7,46 @@ Feature: Create Event
 Scenario Outline: Create a New Event (Normal Flow)
 
 Given Organizer is logged into the Event Registration system 
-When requesting the creation of the event:
-| EventName | Category  | StartTime           | EndTime  
-| NewEvent  | Category1 | 2021-03-14-15-00-00 | 2021-03-14-17-00-00
-Then event "NewEvent" is created in the system
+When requesting the creation of event <EventName>, of <Catetgory>, from <StartTime> to <EndTime> 
+Then event <EventName> is created in the system
 And message indicating successful event creation is issued
+Examples:
+	| EventName | Category  | StartTime           | EndTime            |
+	| NewEvent  | Category1 | 2021-03-14-15-00-00 | 2021-03-14-17-00-00|
+	| Event1    | Category2 | 2021-02-11-16-00-00 | 2021-02-12-08-00-00|
 
 
-
-Scenario Outline: Create Task without Category (Alternate Flow)
+Scenario Outline: Create Event withhout Category (Alternate Flow)
 
 Given Organizer is logged into the Event Registration system
-When requesting the creation of the event:
-| EventName | Category  | StartTime           | EndTime  
-| NewEvent  | Null      | 2021-03-14-15-00-00 | 2021-03-14-17-00-00
+When requesting the creation of event <EventName> from <StartTime> to <EndTime> 
 Then event "NewEvent" is created in the system
 And message indicating successful event creation is issued
+Examples:
+	| EventName | Category  | StartTime           | EndTime            |
+	| NewEvent  | Null      | 2021-03-15-15-00-00 | 2021-03-15-17-00-00|
 
 
-Scenario Outline: Attempt to Create a Duplicate Event (Error Flow)
+Scenario: Attempt to Create a Duplicate Event (Error Flow)
 
 Given Organizer is logged into the Event Registration system
 And an event "NewEvent" already exists 
 When requesting the creation of event "NewEvent"
 Then an "Event already exists" error message is issued 
 
-Scenario Outline: Attempt to Create an Event without a name (Error Flow)
+Scenario: Attempt to Create an Event without a name (Error Flow)
 
 Given Volunteer is logged into the Event Registration system
 When requesting the creation of an event without a name
 Then a "Name is required to create an event" error message is issued
 
-Scenario Outline: Attempt to Create an Event without a start time (Error Flow)
+Scenario: Attempt to Create an Event without a start time (Error Flow)
 
 Given Volunteer is logged into the Event Registration system
 When requesting the creation of an event "NewEvent" with no start time
 Then a "Start time is required to create an event" error message is issued
 
-Scenario Outline: Attempt to Create an Event without an end time (Error Flow)
+Scenario: Attempt to Create an Event without an end time (Error Flow)
 
 Given Volunteer is logged into the Event Registration system
 When requesting the creation of event "NewEvent" with no end time
