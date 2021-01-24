@@ -20,7 +20,7 @@ Feature: Search event by category
       | Sport    |
 
   # Alternate flow
-  Scenario: Search for event by category as an Organizer
+  Scenario Outline: Search for event by category as an Organizer
     Given I am logged in as an Organizer
     And the system contains registered events with category <category>
     When I search for an event by category <category>
