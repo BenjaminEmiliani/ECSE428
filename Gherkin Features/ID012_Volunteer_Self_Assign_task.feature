@@ -4,7 +4,7 @@ Feature: Volunteer assigns themselves to a task in an event
 
 As a Volunteer, I would like to assign myself to a task in an event so that I can help the Organizer.
 
-Scenario Outline: Pick A Task Offered In An Event (Normal Flow)
+Scenario: Pick A Task Offered In An Event (Normal Flow)
 
 Given I am registered as user Volunteer
 And the event FoodDrive exists
@@ -12,7 +12,7 @@ And the tasks have been initialized
 When the task Courier has been selected
 Then I should see the task Courier in my calandar
 
-Scenario Outline: Pick Sevral Non-Conficting Tasks Offered In An Event (Alternate Flow)
+Scenario: Pick Sevral Non-Conficting Tasks Offered In An Event (Alternate Flow)
 
 Given I am registered as user Volunteer
 And the event HomelessShelter exists
@@ -24,7 +24,7 @@ When the following tasks are requested
 	|Laundry	|2021-03-25-19-30-00	|2021-03-25-20-30-00	|
 Then I should see the tasks Janitor, Cafeteria, and Laundry in my calandar
 
-Scenario Outline: Pick Sevral Time-Conficting Tasks Offered In An Event (Error Flow)
+Scenario: Pick Sevral Time-Conficting Tasks Offered In An Event (Error Flow)
 
 Given I am registered as user Volunteer
 And the event OldFolksHome exists
