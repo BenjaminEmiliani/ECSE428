@@ -20,7 +20,7 @@ Scenario Outline: Create Event withhout Category (Alternate Flow)
 
 Given Organizer is logged into the Event Registration system
 When requesting the creation of event <EventName> from <StartTime> to <EndTime> 
-Then event "NewEvent" is created in the system
+Then event <EventName> is created in the system
 And message indicating successful event creation is issued
 Examples:
 	| EventName | Category  | StartTime           | EndTime            |
