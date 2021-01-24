@@ -29,7 +29,7 @@ Feature: Update user/profile information
                 | McGill      | Organization |
                 | Toronto     | Location     |
 
-    Scenario Outline: Update Password (Alternate Flow)
+    Scenario: Update Password (Alternate Flow)
         Given I am logged into the Event Registration system
          When I choose to update my password
           And I provide a new valid password
