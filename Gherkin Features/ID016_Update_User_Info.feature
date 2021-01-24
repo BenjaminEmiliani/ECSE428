@@ -3,15 +3,15 @@
 
 Feature: Update user/profile information
 
-    Scenario Outline: Update name and email (Normal Flow)
+    Scenario: Update name and email (Normal Flow)
      Given I am logged in to the Event Registration system
         When I choose to update my profile information
-         And I provide a new valid email <email>
+         And I provide a new valid email
          And I provide a new first name
          And I provide a new last name
         Then my profile information is updated
          And the system indicated that my profile has been successfully updated
-         And an email is sent to <email>
+         And an email is sent 
 
 
     Scenario Outline: Update optional information (Alternate Flow)
@@ -27,7 +27,7 @@ Feature: Update user/profile information
                 | McGill      | Organization |
                 | Toronto     | Location     |
 
-    Scenario Outline: Update Password (Alternate Flow)
+    Scenario: Update Password (Alternate Flow)
         Given I am logged into the Event Registration system
          When I choose to update my password
           And I provide a new valid password
@@ -35,22 +35,22 @@ Feature: Update user/profile information
          Then my password is changed
           And the system indicates that my profile has been successfully updated
 
-    Scenario Outline: Update email with invalid email (Error Flow)
+    Scenario: Update email with invalid email (Error Flow)
         Given I am logged into the Event Registration system
          When I choose to update my email
-          And I provide an invalid email <email>
+          And I provide an invalid email
          Then my email is not updated
          And the system warns me that the email provided is invalid
 
-    Scenario Outline: Update email with email that already exists in the system (Error Flow)
+    Scenario: Update email with email that already exists in the system (Error Flow)
         Given I am logged into the Event Registration system
-          And the system already contains an account associated with <email>
+          And the system already contains an account associated with
           When I choose to update my email
-          And I provide a valid email <email>
+          And I provide a valid email
           Then my email is not updated
           And the system warns me that the email is already associated to an account in the system
 
-    Scenario Outline: Update Password with invalid password
+    Scenario: Update Password with invalid password (Error Flow)
      Given I am logged into the Event Registration system
       When I choose to update my Password
       And I provide an invalid password
