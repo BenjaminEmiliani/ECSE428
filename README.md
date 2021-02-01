@@ -1,4 +1,6 @@
 # ECSE428 Group Project Winter 2021
+![Maintained][maintained-badge]
+[![Travis Build Status][build-badge]][build]
 
 Group 3 - Jellyfish
 
