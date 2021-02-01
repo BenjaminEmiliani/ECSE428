@@ -1,6 +1,5 @@
 # ECSE428 Group Project Winter 2021
 ![Maintained][maintained-badge]
-[![Travis Build Status][build-badge]][build]
 
 Group 3 - Jellyfish
 
@@ -49,3 +48,7 @@ We will be using Cucumber.js to execute Gherkin story tests for our backend. Our
 
 
 Note: This ReadMe will be updated accordingly as our project progresses.
+
+
+
+[maintained-badge]: https://img.shields.io/badge/maintained-yes-brightgreen
