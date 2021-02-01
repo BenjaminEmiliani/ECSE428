@@ -3,3 +3,9 @@ node_modules
 
 # Name of Matt's VSCode Workspace
 ecse428.code-workspace
+
+# Visual Studio Code
+.vscode
+
+
+
