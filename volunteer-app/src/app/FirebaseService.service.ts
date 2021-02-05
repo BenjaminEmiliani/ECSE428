@@ -35,4 +35,28 @@ export class FirebaseService {
   getVolunteer(userId): Observable<any> {
     return this.db.object("volunteer/" + userId).valueChanges();
   }
+
+  // Update volunteer information using userId
+  updateVolunteer(userId, firstName, lastName, phoneNumber, password ): any{
+    this.db.object("volunteer/" + userId).update({
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phoneNumber,
+      password: password,
+    });
+  }
+
+  //Add a new volunteer to the database
+  createVolunteer(firstName, lastName, email, phoneNumber, password): void{
+    let randomId = Math.floor((Math.random() * 9999) + 1000);;
+    let userId = firstName.charAt(0).toLowerCase() + lastName.charAt(0).toLowerCase() + randomId;
+    console.log("here");
+    this.db.object("volunteer/" + userId).update({
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phoneNumber,
+      password: password,
+      email: email
+    });
+  }
 }
