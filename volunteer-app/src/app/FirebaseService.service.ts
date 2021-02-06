@@ -2,6 +2,7 @@ import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 import { Observable } from "rxjs";
 import { map} from "rxjs/operators";
 import { Injectable } from "@angular/core";
+import { Organizer } from './model/organizer';
 
 @Injectable({
   providedIn: "root",
@@ -57,6 +58,23 @@ export class FirebaseService {
       phone_number: phoneNumber,
       password: password,
       email: email
+    });
+  }
+
+  //Add a new event to the database
+  createEvent(name, category, date, stime, etime, organizer, tasks): void{
+  
+    let randomId = Math.floor((Math.random() * 9999) + 1000);;
+    let eventId = name.charAt(0).toLowerCase() + randomId;
+    console.log("here");
+    this.db.object("event/" + eventId).update({
+      name: name,
+      category: category,
+      date: date,
+      startTime: stime,
+      endTime: etime,
+      organizer: organizer,
+      tasks: []
     });
   }
 }

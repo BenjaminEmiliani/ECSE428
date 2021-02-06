@@ -1,13 +1,14 @@
 import { Time } from "@angular/common";
-import { Volunteer } from './volunteer';
+// import { Volunteer } from './volunteer';
+import { Organizer } from './organizer';
+import { Task } from './task';
 
 export class Event {
   public name: string;
   public category: string
-  public startDate: Date;
+  public date: Date;
   public startTime: Time;
-  public endDate: Date;
   public endTime: Time;
-  public volunteers: Volunteer[];
-  // public organizer: Organizer[];
+  public tasks: Task[];
+  public organizer: Organizer;
 }

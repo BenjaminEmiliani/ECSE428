@@ -26,6 +26,6 @@ export class LoginComponent implements OnInit {
   updateJohn(): void{
     
     var inputValue = (<HTMLInputElement>document.getElementById("a")).value;
-    this.firebase.updateVolunteer("jd3291", inputValue, "Doe", "4234", "123");
+    this.firebase.updateVolunteer("af9247", inputValue, "Doe", "4234", "123");
   }
 }
