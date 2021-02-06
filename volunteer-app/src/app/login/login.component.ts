@@ -28,4 +28,15 @@ export class LoginComponent implements OnInit {
     var inputValue = (<HTMLInputElement>document.getElementById("a")).value;
     this.firebase.updateVolunteer("af9247", inputValue, "Doe", "4234", "123");
   }
+
+  createEvent(): void{
+    var eName = (<HTMLInputElement>document.getElementById("name")).value;
+    var eCategory = (<HTMLInputElement>document.getElementById("category")).value;
+    var eStartTime = (<HTMLInputElement>document.getElementById("startTime")).value;
+    var eEndTime = (<HTMLInputElement>document.getElementById("endTime")).value;
+    var eDate = (<HTMLInputElement>document.getElementById("date")).value;
+    var eOrganizer = (<HTMLInputElement>document.getElementById("organizer")).value;
+
+    this.firebase.createEvent(eName, eCategory, eDate, eStartTime, eEndTime, eOrganizer, []);
+  }
 }

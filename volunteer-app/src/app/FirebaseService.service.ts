@@ -67,7 +67,7 @@ export class FirebaseService {
     // let randomId = Math.floor((Math.random() * 9999) + 1000);;
     // let eventId = name.charAt(0).toLowerCase() + randomId;
     console.log("here");
-    this.db.object("event/").update({
+    this.db.list("event/").push({
       name: name,
       category: category,
       date: date,
