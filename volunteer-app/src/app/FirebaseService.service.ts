@@ -64,10 +64,10 @@ export class FirebaseService {
   //Add a new event to the database
   createEvent(name, category, date, stime, etime, organizer, tasks): void{
   
-    let randomId = Math.floor((Math.random() * 9999) + 1000);;
-    let eventId = name.charAt(0).toLowerCase() + randomId;
+    // let randomId = Math.floor((Math.random() * 9999) + 1000);;
+    // let eventId = name.charAt(0).toLowerCase() + randomId;
     console.log("here");
-    this.db.object("event/" + eventId).update({
+    this.db.object("event/").update({
       name: name,
       category: category,
       date: date,
