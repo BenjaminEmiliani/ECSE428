@@ -47,7 +47,7 @@ export class FirebaseService {
   }
 
   //Add a new volunteer to the database
-  createVolunteer(firstName, lastName, email, phoneNumber, password): void{
+  createVolunteer(firstName, lastName, email,  password, phoneNumber, dob, major): void{
     let randomId = Math.floor((Math.random() * 9999) + 1000);;
     let userId = firstName.charAt(0).toLowerCase() + lastName.charAt(0).toLowerCase() + randomId;
     console.log("here");
@@ -56,7 +56,9 @@ export class FirebaseService {
       last_name: lastName,
       phone_number: phoneNumber,
       password: password,
-      email: email
+      email: email,
+      dob: dob,
+      major: major
     });
   }
 }
