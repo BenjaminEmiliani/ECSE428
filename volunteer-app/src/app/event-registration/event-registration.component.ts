@@ -12,4 +12,12 @@ export class EventRegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // register an volunteer for an event
+  register(): void{
+    var inputVolunteerID = (<HTMLInputElement>document.getElementById("volunteer-id")).value;
+    var inputEventID = (<HTMLInputElement>document.getElementById("event-id")).value;
+
+    //TODO: register them for the event by adding to volunteer node and event node
+    //this.firebase.updateVolunteer("jd3291", inputValue, "Doe", "4234", "123");
+  }
 }
