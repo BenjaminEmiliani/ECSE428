@@ -8,8 +8,7 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-
-
+import { CreateVolunteerComponent } from './create-volunteer/create-volunteer.component';
 
 
 var firebaseConfig = {
@@ -27,13 +26,15 @@ var firebaseConfig = {
     AppComponent,
     ToolbarComponent,
     LoginComponent,
-    routingComponents
+    routingComponents,
+    CreateVolunteerComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     BrowserModule,
     AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

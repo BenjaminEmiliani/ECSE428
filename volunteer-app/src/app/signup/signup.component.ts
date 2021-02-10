@@ -26,50 +26,50 @@ export class SignupComponent implements OnInit {
     //  this.getVolunteerList().subscribe(list => this.list = list);
   }
 
-  createVolunteerAccount(): void{
+  // createVolunteerAccount(): void{
 
-    var inputValue = (<HTMLInputElement>document.getElementById("emailInput")).value;
+  //   var inputValue = (<HTMLInputElement>document.getElementById("emailInput")).value;
 
 
-    if(this.checkVolunteerExists(inputValue) === false){
-      this.firebase.createVolunteer("Marwan", "Khan", inputValue, "kabab223", "5146640021", "25/11/1968", "U3");
-      console.log("SUCCESS ACCOUNT CREATED");
-    }else{
-      console.log("ERROR ACCOUNT EXISTS");
-    }
+  //   if(this.checkVolunteerExists(inputValue) === false){
+  //     this.firebase.createVolunteer("Marwan", "Khan", inputValue, "kabab223", "5146640021", "25/11/1968", "U3");
+  //     console.log("SUCCESS ACCOUNT CREATED");
+  //   }else{
+  //     console.log("ERROR ACCOUNT EXISTS");
+  //   }
 
     
-  }
+  // }
 
-  checkIfEmailExists(email): any{
+  // checkIfEmailExists(email): any{
 
-    return this.db.object("volunteer/" + email).valueChanges();
-  }
+  //   return this.db.object("volunteer/" + email).valueChanges();
+  // }
 
-  checkVolunteerExists(email): any{
+  // checkVolunteerExists(email): any{
 
-    // var email = "foo@mail.com";
-    var output = false;
+  //   // var email = "foo@mail.com";
+  //   var output = false;
 
-    this.volunteer_acc = this.db.list('volunteer').valueChanges();
-    this.volunteer_acc.subscribe( volunteer_acc =>{
-      this.vol = volunteer_acc;
-    });
+  //   this.volunteer_acc = this.db.list('volunteer').valueChanges();
+  //   this.volunteer_acc.subscribe( volunteer_acc =>{
+  //     this.vol = volunteer_acc;
+  //   });
 
-    // console.log(this.vol); 
+  //   // console.log(this.vol); 
 
-    this.vol.forEach(item => {
+  //   this.vol.forEach(item => {
 
-      if(item.email === email){
-        output = true;
-      }
+  //     if(item.email === email){
+  //       output = true;
+  //     }
       
-    });
+  //   });
 
-    // console.log(output);
-    return output;
+  //   // console.log(output);
+  //   return output;
 
-  }
+  // }
 
 
 }
