@@ -9,5 +9,6 @@ export class Organizer {
   public last_name: string;
   public phone_number: string;
   public password: string;
+  public email: string;
   //public signup_date: string;
 }
