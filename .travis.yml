@@ -1,5 +1,14 @@
+addons:
+  chrome: stable
+language: node_js
+node_js: 15
+before_script:
+  - cd volunteer-app
+  - npm install -g @angular/cli
+script:
+  - npm install
+  - ng build --prod
 deploy:
   provider: firebase
   token:
     secure: ltf0+iXB+aXSr3BDXZcnKMqsUoFFB+m7Un1RNwe/gOebpTLxJtes/eiSnTP3gOno0Ea6fsiclI211CX2u69MgNNuF+us4UvE0QSDjul64Hg2uN4EbmQM7AOeQacFLGwCwVOW9DXZhUqvCRMlaw16eBzH3IZ8+ffwy/J5y2pvcXadrHxzAHcJczTc8BP/VwDUwhcUeSC4EbpR3wpljKe56MGHYUuxsTNUGtlUNMt6HNJAp+s3AbIs3DF3vqx7xaT+oDuppTfNZalU7zhe+q7+NRL0S29BeT/XvmppatqASZ9K/03u50jgwfAUD0iGgQJHlrQut7piftogn6iRElP+ApAdwJtAQ+isuOzpn7J7qPLvedBqMre99W0kJ9ohM2WJjWeXtPssFqTBiKO1hWdLatVXSXBiefZHL4r0tuuDo/1R+0b+b0kiC/TW9eI40xx9YeoDlFDTm5So6dek87A1V3HhienS9VlR5GikgFJLLUOK2PZsi3aH+BA388G0yONRu1XvGmx3NuWPGswwdHOlTXo4K3h9xs9CPFbbNSbEPDXffPWjVEA67/8bWkA2ptqGSDucS9cZz3ti+AjUh+ynPpd6OIXo1elIiDlXhWlMh5GWMkGikHI5gb8sPESH+CTBNrw1FL9BO2JL39K0gV/xWSfoJag+swFxhvbn6HhOOpQ=
-
