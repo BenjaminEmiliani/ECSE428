@@ -30,7 +30,7 @@
             ngModel
             name="emailAddress"
             #emailAddress="ngModel"
-            id="emailAddress" type="text" class="form-control">
+            id="emailAddress" type="email" class="form-control">
         <div class="alert alert-danger" *ngIf="emailAddress.touched && !emailAddress.valid">
             <div *ngIf="emailAddress.errors.required">Email address is required</div>
         </div>
@@ -42,7 +42,7 @@
             ngModel
             name="password"
             #password="ngModel"
-            id="password" type="text" class="form-control">
+            id="password" type="password" class="form-control">
         <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
             <div *ngIf="password.errors.required">Password is required</div>
         </div>
@@ -61,7 +61,7 @@
             ngModel
             name="dob"
             #phoneNumber="ngModel"
-            id="dob" type="text" class="form-control">
+            id="dob" type="date" class="form-control">
     </div>
     <div class="form-group">
         <label for="major">Major</label>
@@ -73,13 +73,23 @@
     </div>
     <div class="form-group">
         <label for="year">Year</label>
-        <input 
+        <!-- <input 
             ngModel
             name="year"
             #phoneNumber="ngModel"
-            id="year" type="text" class="form-control">
+            id="year" type="text" class="form-control"> -->
+
+            <select ngModel name="year" #phoneNumber="ngModel" id="year" class="form-control">
+                <option value="U0">U0</option>
+                <option value="U1">U1</option>
+                <option value="U2">U2</option>
+                <option value="U3">U3</option>
+                <option value="U4">U4</option>
+              </select>
     </div>
 
 
     <button (click)="createVolunteerAccount()"> Sign up as Volunteer! </button> 
+
+    <p><span id='display'></span></p>
 </form>
