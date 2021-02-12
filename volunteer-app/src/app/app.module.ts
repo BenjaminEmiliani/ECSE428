@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { EventRegistrationComponent } from './event-registration/event-registration.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -26,6 +27,7 @@ var firebaseConfig = {
     ToolbarComponent,
     LoginComponent,
     SignupComponent,
+    EventRegistrationComponent,
     CreateEventComponent
   ],
   imports: [
