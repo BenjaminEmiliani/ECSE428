@@ -1,7 +1,23 @@
 <h3>Register to Volunteer at an Event</h3>
-<h4>Volunteer ID <input id="volunteer-id"/> </h4>
-<h4>Event ID <input id="event-id"/> </h4>
-<h4><button (click)="register()"> Register </button></h4>
+
+<form [formGroup]="registerForm" (ngSubmit)="submit()">
+    <div>
+        <select formControlName="volunteer" style="padding:3px; margin:5px; min-width:10%">
+            <option [ngValue]="null" disabled>Select Volunteer</option>
+            <option *ngFor="let volunteer of volunteers" [ngValue]="volunteer.id"> {{ volunteer.name }} (ID={{ volunteer.id }})</option>
+        </select>
+        <div *ngIf="submitted && !registerForm.controls.volunteer?.valid" style="font-size:smaller;color:red">*required</div>
+    </div>
+    <div>
+        <select formControlName="event" style="padding:3px; margin:5px; min-width:10%">
+            <option [ngValue]="null" disabled>Select Event</option>
+            <option *ngFor="let event of events" [ngValue]="event.id"> {{ event.name }} (ID={{ event.id }})</option>
+        </select>
+        <div *ngIf="submitted && !registerForm.controls.event?.valid" style="font-size:smaller;color:red">*required</div>
+    </div>
+    
+    <button type="submit" style="padding:3px; margin:5px">Register for Event</button>
+</form>
 
 <nav>
     <a routerLink="">Return to homepage</a>

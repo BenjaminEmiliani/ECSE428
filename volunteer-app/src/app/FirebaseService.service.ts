@@ -63,7 +63,6 @@ export class FirebaseService {
 
   //Add a new event to the database
   createEvent(name, category, date, stime, etime, organizer, tasks): void{
-  
     // let randomId = Math.floor((Math.random() * 9999) + 1000);;
     // let eventId = name.charAt(0).toLowerCase() + randomId;
     console.log("here");
@@ -77,4 +76,18 @@ export class FirebaseService {
       tasks: []
     });
   }
+
+   //Return list of all events in firebase db
+   getEvents(): Observable<any[]> {
+    this.eventRef = this.db.list("event");
+    this.events = this.eventRef
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ id: c.payload.key, ...c.payload.val() }))
+        )
+      );
+    return this.events;
+  }
+
 }

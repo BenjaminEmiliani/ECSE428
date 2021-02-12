@@ -1,3 +1,5 @@
+import { Event } from './event';
+
 export class Volunteer {
   // public address_city: string;
   // public address_number: number;
@@ -9,5 +11,6 @@ export class Volunteer {
   public last_name: string;
   public phone_number: string;
   public password: string;
+  public events: Event[]
   //public signup_date: string;
 }
