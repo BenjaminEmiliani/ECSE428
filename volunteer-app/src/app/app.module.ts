@@ -8,6 +8,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { EventRegistrationComponent } from './event-registration/event-registration.component';
+import { CreateEventComponent } from './create-event/create-event.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 var firebaseConfig = {
   apiKey: "AIzaSyAxq4Bb-wcQ3Hmg-8lqMqaXciTpd699Jw0",
@@ -25,13 +27,15 @@ var firebaseConfig = {
     ToolbarComponent,
     LoginComponent,
     SignupComponent,
-    EventRegistrationComponent
+    EventRegistrationComponent,
+    CreateEventComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
