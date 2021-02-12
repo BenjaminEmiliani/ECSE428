@@ -11,6 +11,6 @@ export class Volunteer {
   public last_name: string;
   public phone_number: string;
   public password: string;
-  public events: Event[]
+  public events: []
   //public signup_date: string;
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireDatabase} from "@angular/fire/database";
 import {FirebaseService} from "../FirebaseService.service";
+import { Volunteer } from '../model/volunteer';
+import { Event } from '../model/event';
 
 @Component({
   selector: 'app-event-registration',
@@ -37,7 +39,11 @@ export class EventRegistrationComponent implements OnInit {
         console.log(volunteers)
         console.log(volunteers.length + " volunteers");
         for(var i=0; i<volunteers.length; i++){
-          this.volunteers.push({id: volunteers[i].id, name: volunteers[i].first_name + " " + volunteers[i].last_name})
+          this.volunteers.push({
+            id: volunteers[i].id, 
+            name: volunteers[i].first_name + " " + volunteers[i].last_name,
+            events: volunteers[i].events,
+          })
         }
     });
 
@@ -47,7 +53,11 @@ export class EventRegistrationComponent implements OnInit {
         console.log(events)
         console.log(events.length + " events");
         for(var i=0; i<events.length; i++){
-          this.events.push({id: events[i].id, name: events[i].name})
+          this.events.push({
+            id: events[i].id, 
+            name: events[i].name,
+            volunteers: events[i].volunteers,
+          })
         }
     });
   }
@@ -68,19 +78,63 @@ export class EventRegistrationComponent implements OnInit {
   
   // this function actually registers the the volunteer for an event
   register(): void{
-    var success = false
+    var success = true;
     var volunteerID = this.registerForm.controls.volunteer.value
     var eventID = this.registerForm.controls.event.value
 
     //TODO - create registerVolunteerEvent() function in FirebaseService
     // cases: register success, already registered for this event, event is past date, event is cancelled, or other register failure
-    //var success = this.firebase.registerVolunteerEvent(volunteerID, eventID)
-    
-    // TODO - success/failure notification on webpage
-    if (success){
-      //success notification
-    } else {
-      //failure notification
+
+    var vol;
+    var event;
+
+    for(var v of this.volunteers) {
+      if (v.id == volunteerID) {
+        vol = {
+          events: v.events,
+        }
+      }
     }
+
+    for(var e of this.events) {
+      if (e.id == eventID) {
+        event = {
+          volunteers: e.volunteers,
+        }
+      }
+    }
+    
+
+    if (vol.events == undefined) {
+      vol.events = new Array();
+    }
+
+    if (event.volunteers == undefined) {
+      event.volunteers = new Array();
+    }
+
+    for(e of vol.events) {
+      if (e.match(eventID)) {
+        console.log("Error already registered for this event");
+        success = false;
+      }
+    }
+
+    for(v of event.volunteers) {
+      if (v.match(volunteerID)) {
+        console.log("Error volunteer already registered for this event");
+        success = false;
+      }
+    }
+
+    if (success) {
+      vol.events.push(eventID);
+      event.volunteers.push(volunteerID);
+      
+      this.firebase.registerVolunteerEvent(volunteerID, vol.events, eventID, event.volunteers);
+    } else {
+      console.log("Error did not register for this event");
+    }
+    
   }
 }

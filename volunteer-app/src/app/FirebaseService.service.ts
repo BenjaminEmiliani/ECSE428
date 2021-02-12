@@ -3,7 +3,8 @@ import { Observable } from "rxjs";
 import { map} from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Organizer } from './model/organizer';
-
+import { Event } from './model/event';
+import { Volunteer } from './model/volunteer';
 @Injectable({
   providedIn: "root",
 })
@@ -15,6 +16,7 @@ export class FirebaseService {
   eventRef: AngularFireList<any>;
   events: Observable<any[]>;
   user: Observable<any>;
+  vol;
 
   
   constructor(private db: AngularFireDatabase) {}
@@ -38,7 +40,7 @@ export class FirebaseService {
   }
 
   // Update volunteer information using userId
-  updateVolunteer(userId, firstName, lastName, phoneNumber, password ): any{
+  updateVolunteer(userId, firstName, lastName, phoneNumber, password): any{
     this.db.object("volunteer/" + userId).update({
       first_name: firstName,
       last_name: lastName,
@@ -57,7 +59,8 @@ export class FirebaseService {
       last_name: lastName,
       phone_number: phoneNumber,
       password: password,
-      email: email
+      email: email,
+      events: [],
     });
   }
 
@@ -73,7 +76,8 @@ export class FirebaseService {
       startTime: stime,
       endTime: etime,
       organizer: organizer,
-      tasks: []
+      tasks: [],
+      volunteers: []
     });
   }
 
@@ -89,5 +93,21 @@ export class FirebaseService {
       );
     return this.events;
   }
+
+
+  registerVolunteerEvent(volunteerID, eventList, eventID, volunteerList): boolean {
+
+    
+    this.db.object("volunteer/" + volunteerID).update({
+      events: eventList,
+    });
+
+    this.db.object("event/" + eventID).update({
+      volunteers: volunteerList,
+    });
+
+    return true;
+  } 
+
 
 }

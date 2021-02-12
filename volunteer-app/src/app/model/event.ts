@@ -10,7 +10,7 @@ export class Event {
   public date: Date;
   public startTime: Time;
   public endTime: Time;
-  public volunteers: Volunteer[];
+  public volunteers: [];
   public tasks: Task[];
   public organizer: Organizer;
 }
