@@ -1,5 +1,6 @@
 # ECSE428 Group Project Winter 2021
 ![Maintained][maintained-badge]
+[![Travis Build Status][build-badge]][build]
 
 Group 3 - Jellyfish
 
@@ -52,3 +53,5 @@ Note: This ReadMe will be updated accordingly as our project progresses.
 
 
 [maintained-badge]: https://img.shields.io/badge/maintained-yes-brightgreen
+[build-badge]: https://travis-ci.org/BenjaminEmiliani/ECSE428.svg?branch=dev
+[build]: https://travis-ci.org/BenjaminEmiliani/ECSE428
