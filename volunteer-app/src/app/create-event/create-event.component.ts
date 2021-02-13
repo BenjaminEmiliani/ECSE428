@@ -12,6 +12,7 @@ export class CreateEventComponent implements OnInit {
   
   registerForm: FormGroup;
   submitted = false;
+  createdEvent = false;
 
   constructor(private db: AngularFireDatabase, private firebase: FirebaseService, private formBuilder: FormBuilder) { }
 
@@ -57,7 +58,9 @@ export class CreateEventComponent implements OnInit {
     var eDate= this.f.date.value;
     var eOrganizer= this.f.organizer.value;
 
+
     this.firebase.createEvent(eName, eCategory, eDate, eStartTime, eEndTime, eOrganizer, []);
+    this.createdEvent = true;
   }
 
 }

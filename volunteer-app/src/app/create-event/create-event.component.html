@@ -51,9 +51,7 @@
             <button class="btn btn-primary">Create Event</button>
           </div>
         </form>
-        <div>
-          <ul><li *ngFor="let item of items; index as i; trackBy: trackByFn">...</li></ul>
-        </div>
+        <div id="Check" *ngIf="createdEvent" > The event has been created </div>     
       </div>
     </div>
   </div>
