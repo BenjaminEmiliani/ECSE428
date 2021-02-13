@@ -1,29 +1,33 @@
+# Backlog Item ID001 | ECSE 428 Group 3 | Created by Marwan Khan, 260762251
+
 Feature: Create account for volunteer
 
 User Story:
 As a volunteer
-I want to be able to create an account
-With my McGill email and password
+I want to be able to create a volunteer account
+With my email and password
 So that I can start regestering for events
 
-  Background: 
-    Given I am a McGill Student
-      And I have a valid McGill email and password
-  
-  Scenario: I succesfully create a volunteer account (Normal Flow)
-     When I enter my McGill email, password, student ID, first name and last name
-      And I select account type as volunteer
+
+  Scenario: (Normal Flow) I succesfully create a volunteer account with valid email, password, name and provide extra profile details.
+    Given the system does not contain an account with associated with <email>
+     When I enter my email, password, first name, last name
+      And I enter extra profile details
+      And I request to create volunteer account
      Then the volunteer account is created
       And the system indicates that the volunteer account has been successfully created
   
-  Scenario: I don't successfully create a volunteer account because I input an invalid email (Error Flow)
+  Scenario: (Alternate Flow) I succesfully create a volunteer account with valid email, password, name and no extra profile details.
+    Given the system does not contain an account with associated with <email>
+     When I enter my email, password, first name, last name
+      And I enter no extra profile details
+      And I request to create volunteer account
+     Then the volunteer account is created
+      And the system indicates that the volunteer account has been successfully created
+  
+  Scenario: (Error Flow) I don't successfully create a volunteer account because I input an invalid email
+    Given the system does not contain an account associated with <email>
      When I eneter an invalid email
       And I request to create volunteer account
      Then the account is not created
       And the system warns me that I have entered an invalid email
-  
-  Scenario: I don't successfully create a volunteer account because I input an invalid McGill ID (Error Flow)
-     When I eneter an invalid McGill ID
-      And I request to create volunteer account
-     Then the account is not created
-      And the system warns me that I have entered an invalid McGill ID
