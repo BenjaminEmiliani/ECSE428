@@ -18,11 +18,11 @@ export class CreateEventComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
-      category: ['', [Validators.required ]],
+      category: [''],
       date: ['', [Validators.required ]],
       startTime: ['', [Validators.required], ],
       endTime: ['', [Validators.required ]],
-      organizer: ['', [Validators.required ]],
+      organizer: [''],
     });
   }
 
