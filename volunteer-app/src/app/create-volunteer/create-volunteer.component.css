@@ -1,5 +1,10 @@
 body { padding: 20px; }
 
-.form-control.ng-touched.ng-invalid {
-    border: 2px solid red;
+.ng-valid:not(form):not(.ng-pristine),
+.ng-valid.required {
+  background-color: lightgreen;
+}
+
+.ng-invalid:not(form) {
+  background-color: lightcoral;
 }

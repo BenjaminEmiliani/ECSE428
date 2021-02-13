@@ -3,6 +3,8 @@ import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 import { Volunteer } from "../model/volunteer";
 import {FirebaseService} from "../FirebaseService.service"
 import { Observable } from "rxjs";
+import { FormGroup, FormControl, Validators, FormBuilder } 
+    from '@angular/forms';
 
 @Component({
   selector: 'app-create-volunteer',
@@ -16,6 +18,16 @@ export class CreateVolunteerComponent implements OnInit {
   volunteer_acc: Observable<any>;
   vol: any[];
   
+  form = new FormGroup({
+    "firstName": new FormControl("", [Validators.required]),
+    "lastName": new FormControl("", Validators.required),
+    "emailAddress": new FormControl("", [Validators.required, Validators.email]),
+    "password": new FormControl("", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]),
+    "phoneNumber": new FormControl("", Validators.pattern(/^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/)),
+    "dob": new FormControl(""),
+    "major": new FormControl(""),
+    "year": new FormControl("")
+});
 
   constructor(private db: AngularFireDatabase, private firebase: FirebaseService) { }
 
