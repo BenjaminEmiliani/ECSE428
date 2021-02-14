@@ -60,7 +60,7 @@
         <input 
             ngModel
             name="dob"
-            #phoneNumber="ngModel"
+            #dob="ngModel"
             id="dob" type="date" class="form-control">
     </div>
     <div class="form-group">
@@ -68,7 +68,7 @@
         <input 
             ngModel
             name="major"
-            #phoneNumber="ngModel"
+            #major="ngModel"
             id="major" type="text" class="form-control">
     </div>
     <div class="form-group">
@@ -79,7 +79,7 @@
             #phoneNumber="ngModel"
             id="year" type="text" class="form-control"> -->
 
-            <select ngModel name="year" #phoneNumber="ngModel" id="year" class="form-control">
+            <select ngModel name="year" #year="ngModel" id="year" class="form-control">
                 <option value="U0">U0</option>
                 <option value="U1">U1</option>
                 <option value="U2">U2</option>
@@ -89,7 +89,7 @@
     </div>
 
 
-    <button (click)="createVolunteerAccount()"> Sign up as Volunteer! </button> 
+    <button class="btn signup-volunteer-btn" (click)="createVolunteerAccount()"> Sign up as Volunteer! </button> 
 
     <p><span id='display'></span></p>
 </form>

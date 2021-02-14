@@ -10,24 +10,22 @@ So that I can start regestering for events
 
 
   Scenario: (Normal Flow) I succesfully create a volunteer account with valid email, password, name and provide extra profile details.
-    Given the system does not contain an account with associated with <email>
+    Given I am on volunteer signup page
      When I enter my email, password, first name, last name
       And I enter extra profile details
       And I request to create volunteer account
-     Then the volunteer account is created
-      And the system indicates that the volunteer account has been successfully created
+     Then the system indicates that the volunteer account has been successfully created
   
   Scenario: (Alternate Flow) I succesfully create a volunteer account with valid email, password, name and no extra profile details.
-    Given the system does not contain an account with associated with <email>
-     When I enter my email, password, first name, last name
+    Given I am on volunteer signup page
+     When I enter my first name, last name, email, password
       And I enter no extra profile details
       And I request to create volunteer account
-     Then the volunteer account is created
-      And the system indicates that the volunteer account has been successfully created
+     Then the system indicates that the volunteer account has been successfully created
   
   Scenario: (Error Flow) I don't successfully create a volunteer account because I input an invalid email
-    Given the system does not contain an account associated with <email>
+    Given I am on volunteer signup page
      When I eneter an invalid email
       And I request to create volunteer account
-     Then the account is not created
-      And the system warns me that I have entered an invalid email
+     Then the system warns me that I have entered an invalid email
+    

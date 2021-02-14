@@ -53,5 +53,5 @@ Note: This ReadMe will be updated accordingly as our project progresses.
 
 
 [maintained-badge]: https://img.shields.io/badge/maintained-yes-brightgreen
-[build-badge]: https://travis-ci.org/BenjaminEmiliani/ECSE428.svg?branch=main
+[build-badge]: https://travis-ci.org/BenjaminEmiliani/ECSE428.svg?branch=dev
 [build]: https://travis-ci.org/BenjaminEmiliani/ECSE428
