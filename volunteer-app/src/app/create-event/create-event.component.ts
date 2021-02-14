@@ -35,6 +35,7 @@ export class CreateEventComponent implements OnInit {
     this.submitted = true;
  
     if (this.registerForm.invalid) {
+      this.createdEvent = false;
       return;
     }
 

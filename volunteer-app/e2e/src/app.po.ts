@@ -62,7 +62,7 @@ export class AppPage {
 
   async newEvent(name: string, category: string, date: string, sTime: string, eTime: string): Promise<void> {
     //var inputName = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[1]/input'));
-    var inputName = element(by.css("input[formControlName=name]"));
+    var inputName = element(by.css('input[formControlName=name]'));
     inputName.sendKeys(name);  
 
     var inputCategory = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[2]/input'));
@@ -72,10 +72,10 @@ export class AppPage {
     inputDate.sendKeys(date);  
 
     var inputSTime = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[4]/input'));
-    inputSTime.sendKeys(date);  
+    inputSTime.sendKeys(sTime);  
 
     var inputETime = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[5]/input'));
-    inputETime.sendKeys(sTime);  
+    inputETime.sendKeys(eTime);  
 
     var btn = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[7]/button'));  
   
