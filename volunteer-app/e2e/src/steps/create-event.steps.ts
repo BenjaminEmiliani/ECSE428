@@ -65,3 +65,4 @@ Then(/^a "Name is required to create an event" error message is issued$/, async 
   await sleep(1000);
   expect("The event has been created").to.equal("The event has been created");
 });
+
