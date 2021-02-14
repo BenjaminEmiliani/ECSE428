@@ -6,11 +6,14 @@ export class Volunteer {
   // public address_postal_code: string;
   // public address_street: string;
   // public dob: string;
-  public email: string;
   public first_name: string;
   public last_name: string;
-  public phone_number: string;
+  public email: string;
   public password: string;
-  public events: []
+  public phone_number: string;
+  public dob: Date;
+  public major: string;
+  public year: string;
+  public events: [];
   //public signup_date: string;
 }
