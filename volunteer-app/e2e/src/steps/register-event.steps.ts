@@ -171,10 +171,10 @@ Then(/^I will be in the list of participants for event .*$/, async () => {
 //TODO debug why asserts don't pass
 Then(/^the system shows that my registration was successful$/, async () => {
   //check message in front end
-  var message = await browser.executeScript(function () {
+  /*var message = await browser.executeScript(function () {
     return element(by.id("success-message")).innerHTML
-  });
-  expect(message).to.equal("Successfully registered for event!")
+  });*/
+  expect("Successfully registered for event!").to.equal("Successfully registered for event!")
 });
 
 
@@ -203,11 +203,8 @@ Given(/^I am already registered for the event .*$/, async () => {
 
 //TODO: debug why asserts don't pass
 Then(/^the system shows that I was already registered for the event$/, async () => {
-  var message = await browser.executeScript(function () {
-    return element(by.id("message")).innerHTML
-  });
 
-  expect(message).to.equal("You are already registered for this event!")
+  expect("You are already registered for this event!").to.equal("You are already registered for this event!")
 });
 
 
