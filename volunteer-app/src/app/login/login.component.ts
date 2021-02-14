@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   user: any;
   model = new Volunteer();
 
-  constructor(private db: AngularFireDatabase, private firebase: FirebaseService,) { }
+  constructor(private db: AngularFireDatabase, private firebase: FirebaseService) { }
 
   ngOnInit(): void {
     this.user = this.firebase.getVolunteer("jd3291")
@@ -21,4 +21,14 @@ export class LoginComponent implements OnInit {
       this.user = element;
     });
   }
+
+  //Example method to update a volunteer
+  updateJohn(): void{
+    
+
+    var inputValue = (<HTMLInputElement>document.getElementById("nameInput")).value;
+    this.firebase.updateVolunteer("jd3291", inputValue, "Doe", "4234", "123");
+
+  }
+
 }

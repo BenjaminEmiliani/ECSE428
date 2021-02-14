@@ -1,2 +1,8 @@
-<p>login works!</p>
-<h4>{{ user.first_name }} {{ user.last_name }}</h4>
+<p>login goes here </p>
+<p>** The following component is to be used as an example **  </p>
+<h3>Update this volunteer's first name</h3>
+
+<h4 id="username">{{ user.first_name }} {{ user.last_name }} 
+  <input id="nameInput"/></h4>
+  <button class="btn update-button"(click)="updateJohn()"> Update Volunteer</button>
+
