@@ -55,25 +55,10 @@ export class AppPage {
     return error
   }
 
-  
-  resolveAfter2Seconds(x) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(x);
-      }, 2000);
-    });
-  }
-
-  getValueWithPromise() {
-    this.resolveAfter2Seconds(20).then(value => {
-      console.log(`promise result: ${value}`);
-    });
-    console.log('I will not wait until promise is resolved');
-  }
-  
 
   async newEvent(name: string, category: string, date: string, sTime: string, eTime: string): Promise<void> {
-    var inputName = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[1]/input'));
+    //var inputName = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[1]/input'));
+    var inputName = element(by.css("input[formControlName=name]"));
     inputName.sendKeys(name);  
 
     var inputCategory = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[2]/input'));
@@ -90,7 +75,6 @@ export class AppPage {
 
     var btn = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[7]/button'));  
   
-
     btn.click();
     btn.click();
 

@@ -2,6 +2,8 @@ import { Before, Given, Then, When } from 'cucumber';
 import { expect, assert } from 'chai';
 import { AppPage } from '../app.po';
 import { Event } from "../../../src/app/model/event";
+import { browser, by, element, protractor } from 'protractor';
+
 
 let page: AppPage;
 let event: any;
@@ -17,8 +19,13 @@ Before(() => {
   event.endTime = "10:00 AM";
 });
 
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+
 Given(/^I am on the event page$/, async () => {
-  await page.navigateTo();
+  return browser.get(browser.baseUrl);
 });
 
 When(/^requesting the creation of event EventTest, of Category1, on 2021-03-15, from 08:00 AM to 10:00 AM$/, () => {
@@ -26,9 +33,11 @@ When(/^requesting the creation of event EventTest, of Category1, on 2021-03-15, 
 });
 
 Then(/^event EventTest is created in the system$/, async () => {
+  await sleep(1000);
   expect(await page.getEventCreation()).to.equal("The event has been created");
 });
 
+/*
 Given(/^I am on the event page and want to create an event without category$/, async () => {
   await page.navigateTo();
 });
@@ -52,3 +61,4 @@ When(/^requesting the creation of event on 2021-03-15, from 08:00 AM to 10:00 AM
 Then(/^a "Name is required to create an event" error message is issued$/, async () => {
   expect(await page.getNotSuccessfulEventCreation()).to.equal(">> required");
 });
+*/
