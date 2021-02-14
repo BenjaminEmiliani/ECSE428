@@ -1,5 +1,5 @@
 
-import { Before, Given, Then, When } from 'cucumber';
+import { Before, Given, Then, When, After} from 'cucumber';
 import { expect, assert } from 'chai';
 import { AppPage } from '../app.po';
 import {Volunteer} from "../../../src/app/model/volunteer"
@@ -13,6 +13,38 @@ import { browser, by, element, protractor } from 'protractor';
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
+
+Before( async() => {
+
+  var argument = ["Harry", "Elon"]
+
+  await browser.executeScript(function() {
+    const url='https://ecse428-5c703-default-rtdb.firebaseio.com/volunteer.json?orderBy=\"first_name\"&equalTo=\"' + argument[0] +'\"';
+    const Http = new XMLHttpRequest();
+    Http.open("GET", url, false); //false for SYNCH request so we can check result
+    Http.send();
+     
+    if (Http.response === "{}"){
+      return false //no entry found for this first name
+    } else {
+      //otherwise, check last name entries:
+      var res = JSON.parse(Http.response)
+      for (var vol in res){
+        if (res[vol].last_name === "Potter" || res[vol].last_name === "Musk"){
+
+          browser.executeScript(function (){
+            const Http = new XMLHttpRequest();
+            Http.open("DELETE", 'https://ecse428-5c703-default-rtdb.firebaseio.com/volunteer/' + vol + ".json");
+            Http.send();
+          }, vol);
+          
+        }
+      }
+      return false //did not find any matching last name
+    }
+  });
+  
+});
 
 
 Given(/^I am on volunteer signup page$/, async () => {
@@ -52,7 +84,7 @@ When(/^I enter extra profile details$/,async () => {
     await sleep(1000);
 
     var dob = element(by.id('dob'));
-    dob.sendKeys("02/12/2021");
+    dob.sendKeys("1995-11-20");
 
     await sleep(1000);
 
