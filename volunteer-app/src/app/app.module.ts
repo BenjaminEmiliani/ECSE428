@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
-import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { EventRegistrationComponent } from './event-registration/event-registration.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateVolunteerComponent } from './create-volunteer/create-volunteer.component';
@@ -28,7 +29,9 @@ var firebaseConfig = {
     LoginComponent,
     SignupComponent,
     CreateEventComponent,
-    CreateVolunteerComponent
+    CreateVolunteerComponent,
+    EventRegistrationComponent,
+    CreateEventComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),

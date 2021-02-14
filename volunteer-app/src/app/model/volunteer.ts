@@ -1,3 +1,5 @@
+import { Event } from './event';
+
 export class Volunteer {
   // public address_city: string;
   // public address_number: number;
@@ -12,5 +14,6 @@ export class Volunteer {
   public dob: Date;
   public major: string;
   public year: string;
+  public events: [];
   //public signup_date: string;
 }
