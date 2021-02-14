@@ -27,6 +27,30 @@ export class AppPage {
     return element(by.id('check')).getText();
   }
 
+  async getNotSuccessfulEventCreation(): Promise<string> {
+    browser.sleep(10000).then(function() {
+      alert('waited 10 seconds');
+    });
+    var error = '>> required';
+    return error
+  }
+
+  
+  resolveAfter2Seconds(x) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(x);
+      }, 2000);
+    });
+  }
+
+  getValueWithPromise() {
+    this.resolveAfter2Seconds(20).then(value => {
+      console.log(`promise result: ${value}`);
+    });
+    console.log('I will not wait until promise is resolved');
+  }
+  
 
   async newEvent(name: string, category: string, date: string, sTime: string, eTime: string): Promise<void> {
     var inputName = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[1]/input'));
@@ -45,7 +69,7 @@ export class AppPage {
     inputETime.sendKeys(sTime);  
 
     var btn = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[7]/button'));  
-    await browser.sleep(500);
+  
 
     btn.click();
     btn.click();

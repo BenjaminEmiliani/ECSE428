@@ -40,3 +40,15 @@ When(/^requesting the creation of event EventTest, on 2021-03-15, from 08:00 AM 
 Then(/^event EventTest without a category is created in the system$/, async () => {
   expect(await page.getEventCreation()).to.equal("The event has been created");
 });
+
+Given(/^I am on the event page and want to create an event without a name$/, async () => {
+  await page.navigateTo();
+});
+
+When(/^requesting the creation of event on 2021-03-15, from 08:00 AM to 10:00 AM$/, () => {
+  page.newEvent("", "", event.date, event.startTime, event.endTime);
+});
+
+Then(/^a "Name is required to create an event" error message is issued$/, async () => {
+  expect(await page.getNotSuccessfulEventCreation()).to.equal(">> required");
+});

@@ -21,3 +21,12 @@ Then event <EventName> without a category is created in the system
 Examples:
 	| EventName | Date        | StartTime  | EndTime  |
 	| EventTest  | 2021-03-15  | 08:00 AM   | 10:00 AM |
+
+Scenario Outline: Attempt to Create an event without a name (Error Flow)
+
+Given I am on the event page and want to create an event without a name
+When requesting the creation of event on <Date>, from <StartTime> to <EndTime> 
+Then a "Name is required to create an event" error message is issued
+Examples:
+	| Date        | StartTime  | EndTime  |
+	| 2021-03-15  | 08:00 AM   | 10:00 AM |

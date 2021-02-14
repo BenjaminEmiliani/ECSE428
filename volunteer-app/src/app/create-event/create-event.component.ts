@@ -57,10 +57,11 @@ export class CreateEventComponent implements OnInit {
     var eEndTime= this.f.endTime.value;
     var eDate= this.f.date.value;
     var eOrganizer= this.f.organizer.value;
-
+    
+    this.createdEvent = true;
 
     this.firebase.createEvent(eName, eCategory, eDate, eStartTime, eEndTime, eOrganizer, []);
-    this.createdEvent = true;
+    
   }
 
 }
