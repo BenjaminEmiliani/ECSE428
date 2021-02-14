@@ -42,14 +42,14 @@ export class AppPage {
 
   async getEventCreation(): Promise<string> {
     browser.sleep(10000).then(function() {
-      alert('waited 10 seconds');
+      console.log('waited 10 seconds');
     });
     return element(by.id('check')).getText();
   }
 
   async getNotSuccessfulEventCreation(): Promise<string> {
     browser.sleep(10000).then(function() {
-      alert('waited 10 seconds');
+      console.log('waited 10 seconds');
     });
     var error = '>> required';
     return error
