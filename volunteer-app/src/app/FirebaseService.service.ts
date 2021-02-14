@@ -71,7 +71,6 @@ export class FirebaseService {
   createEvent(name, category, date, stime, etime, organizer, tasks): void{
     // let randomId = Math.floor((Math.random() * 9999) + 1000);;
     // let eventId = name.charAt(0).toLowerCase() + randomId;
-    console.log("here");
     this.db.list("event/").push({
       name: name,
       category: category,
