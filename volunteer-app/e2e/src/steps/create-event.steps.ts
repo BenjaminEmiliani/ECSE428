@@ -28,21 +28,22 @@ Given(/^I am on the event page$/, async () => {
   return browser.get(browser.baseUrl);
 });
 
-When(/^requesting the creation of event EventTest, of Category1, on 2021-03-15, from 08:00 AM to 10:00 AM$/, () => {
+When(/^requesting the creation of event EventTest, of Category1, on 2021-03-15, from 08:00 AM to 10:00 AM$/, async () => {
   page.newEvent(event.name, event.category, event.date, event.startTime, event.endTime);
+  await sleep(1000);
 });
 
 Then(/^event EventTest is created in the system$/, async () => {
   await sleep(1000);
-  expect(await page.getEventCreation()).to.equal("The event has been created");
+  expect(await page.getCheck()).to.equal("The event has been created");
 });
 
-/*
 Given(/^I am on the event page and want to create an event without category$/, async () => {
-  await page.navigateTo();
+  return browser.get(browser.baseUrl);
 });
 
-When(/^requesting the creation of event EventTest, on 2021-03-15, from 08:00 AM to 10:00 AM$/, () => {
+When(/^requesting the creation of event EventTest, on 2021-03-15, from 08:00 AM to 10:00 AM$/,async () => {
+  await sleep(1000);
   page.newEvent(event.name, "", event.date, event.startTime, event.endTime);
 });
 
@@ -51,14 +52,14 @@ Then(/^event EventTest without a category is created in the system$/, async () =
 });
 
 Given(/^I am on the event page and want to create an event without a name$/, async () => {
-  await page.navigateTo();
+  return browser.get(browser.baseUrl);
 });
 
-When(/^requesting the creation of event on 2021-03-15, from 08:00 AM to 10:00 AM$/, () => {
+When(/^requesting the creation of event on 2021-03-15, from 08:00 AM to 10:00 AM$/, async () => {
+  await sleep(1000);
   page.newEvent("", "", event.date, event.startTime, event.endTime);
 });
 
 Then(/^a "Name is required to create an event" error message is issued$/, async () => {
   expect(await page.getNotSuccessfulEventCreation()).to.equal(">> required");
 });
-*/

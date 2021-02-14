@@ -13,3 +13,15 @@ Examples:
 	| EventName | Category  | Date           | StartTime | EndTime  |
 	| EventTest | Category1 | 2021-03-15     | 08:00 AM  | 10:00 AM |
 
+Scenario: (Alternate Flow) I succesfully create a volunteer account with valid email, password, name and no extra profile details.
+   	Given I am on volunteer signup page
+	When I enter my first name, last name, email, password
+    And I enter no extra profile details
+    And I request to create volunteer account
+	Then the system indicates that the volunteer account has been successfully created
+ 
+Scenario: (Error Flow) I don't successfully create a volunteer account because I input an invalid email
+	Given I am on volunteer signup page
+	When I eneter an existing email
+	And I request to create volunteer account
+	Then the system warns me that I have entered an existing email

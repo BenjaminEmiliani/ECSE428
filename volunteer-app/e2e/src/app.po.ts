@@ -22,6 +22,10 @@ export class AppPage {
   //   return element(by.id('username')).getText();
   // }
 
+  async getCheck(): Promise<string> {
+    return element(by.id('check')).getText();
+  }
+
 
   
   async createAllVolenteerFeilds(): Promise<Object> {
