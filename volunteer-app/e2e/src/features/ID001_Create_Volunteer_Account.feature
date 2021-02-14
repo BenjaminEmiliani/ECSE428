@@ -25,7 +25,7 @@ So that I can start regestering for events
   
   Scenario: (Error Flow) I don't successfully create a volunteer account because I input an invalid email
     Given I am on volunteer signup page
-     When I eneter an invalid email
+     When I eneter an existing email
       And I request to create volunteer account
-     Then the system warns me that I have entered an invalid email
+     Then the system warns me that I have entered an existing email
     

@@ -135,7 +135,7 @@ When(/^I enter no extra profile details$/,async () => {
 
 // 3) Scenario: (Error Flow) I don't successfully create a volunteer account because I input an invalid email
 
-When(/^I eneter an invalid email$/,async () => {
+When(/^I eneter an existing email$/,async () => {
 
     var firstName = element(by.id('firstName'));
     firstName.sendKeys("Elon");
@@ -157,9 +157,9 @@ When(/^I eneter an invalid email$/,async () => {
 
   });
 
-  Then(/^the system warns me that I have entered an invalid email$/, async () => {
+  Then(/^the system warns me that I have entered an existing email$/, async () => {
 
     await sleep(1000);
-    expect(await element(by.id('display')).getText()).to.equal('Error: Please Check Your Inputs');
+    expect(await element(by.id('display')).getText()).to.equal('Error: Email Already Exists');
 
   });
