@@ -174,7 +174,7 @@ Then(/^the system shows that my registration was successful$/, async () => {
   /*var message = await browser.executeScript(function () {
     return element(by.id("success-message")).innerHTML
   });*/
-  expect("Successfully registered for event!").to.equal("Successfully registered for event!")
+  expect("Successfully registered for event!").to.equal("Successfully registered for event!") 
 });
 
 
