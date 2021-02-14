@@ -20,8 +20,11 @@ export class AppPage {
     return element(by.id('username')).getText();
   }
 
-  async getEvent(): Promise<string> {
-    return ;
+  async getEventCreation(): Promise<string> {
+    browser.sleep(10000).then(function() {
+      alert('waited 10 seconds');
+    });
+    return element(by.id('check')).getText();
   }
 
 
@@ -42,9 +45,13 @@ export class AppPage {
     inputETime.sendKeys(sTime);  
 
     var btn = element(by.xpath('/html/body/app-root/app-create-event/div/div/div/form/div[7]/button'));  
-    browser.sleep(500);
+    await browser.sleep(500);
 
     btn.click();
     btn.click();
+
+    
+    
+    
   }
 }
