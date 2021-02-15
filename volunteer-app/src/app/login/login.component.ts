@@ -74,9 +74,9 @@ export class LoginComponent implements OnInit {
     for (var v of this.volunteers) {
       if (v.email == emailcheck && v.password == passcheck) {
         console.log("Login successful with" + emailcheck);
-        (<HTMLInputElement>document.getElementById("display")).innerHTML = "<span style='color: red;'> Succesful login! </span>";
+        (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: red;'> Succesful login! </span>";
       } else
-        (<HTMLInputElement>document.getElementById("display")).innerHTML = "<span style='color: red;'> Incorrect email or password </span>";
+        (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: red;'> Incorrect email or password </span>";
     }
 
     //check in organizers TODO

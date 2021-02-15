@@ -22,12 +22,12 @@ Given(/^I am on the login page$/, async () => {
 
 When(/^I enter my email and password$/,async () => {
 
-    var emailAddress = element(by.id('email'));
+    var emailAddress = element(by.id('emailLogin'));
     emailAddress.sendKeys("jimdoe@gmail.com");
 
     await sleep(1000);
 
-    var password = element(by.id('password'));
+    var password = element(by.id('passwordLogin'));
     password.sendKeys("123"); 
 
   });
@@ -56,12 +56,12 @@ Then(/^the system indicates that I have been logged in successfully to my accoun
 
 When(/^I enter a wrong email and my correct password$/,async () => {
 
-    var emailAddress = element(by.id('email'));
+    var emailAddress = element(by.id('emailLogin'));
     emailAddress.sendKeys("jimdoe1@gmail.com");
 
     await sleep(1000);
 
-    var password = element(by.id('password'));
+    var password = element(by.id('passwordLogin'));
     password.sendKeys("123"); 
 
   });
@@ -79,7 +79,7 @@ When(/^I request to log in with the wrong email$/,async () => {
 Then(/^the system warns me that I have a wrong email$/, async () => {
 
     await sleep(1000);
-    expect(await element(by.id('display')).getText()).to.equal('Incorrect email or password');
+    expect(await element(by.id('displayLogin')).getText()).to.equal('Incorrect email or password');
 
   });
 
@@ -89,12 +89,12 @@ Then(/^the system warns me that I have a wrong email$/, async () => {
 
 When(/^I enter my correct email and a wrong password$/,async () => {
 
-    var emailAddress = element(by.id('email'));
+    var emailAddress = element(by.id('emailLogin'));
     emailAddress.sendKeys("jimdoe@gmail.com");
 
     await sleep(1000);
 
-    var password = element(by.id('password'));
+    var password = element(by.id('passwordLogin'));
     password.sendKeys("1234"); 
 
   });
@@ -112,6 +112,6 @@ When(/^I request to log in with the wrong password$/,async () => {
 Then(/^the system warns me that I have a wrong password$/, async () => {
 
     await sleep(1000);
-    expect(await element(by.id('display')).getText()).to.equal('Incorrect email or password');
+    expect(await element(by.id('displayLogin')).getText()).to.equal('Incorrect email or password');
 
   });
