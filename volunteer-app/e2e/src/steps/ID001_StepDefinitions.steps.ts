@@ -1,5 +1,5 @@
 
-import { Before, Given, Then, When } from 'cucumber';
+import { Before, Given, Then, When, After} from 'cucumber';
 import { expect, assert } from 'chai';
 import { AppPage } from '../app.po';
 import {Volunteer} from "../../../src/app/model/volunteer"
@@ -13,6 +13,74 @@ import { browser, by, element, protractor } from 'protractor';
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
+
+Before( async() => {
+
+
+  var volunteerExists = await browser.executeScript(function() {
+    const url='https://ecse428-5c703-default-rtdb.firebaseio.com/volunteer.json?orderBy=\"first_name\"&equalTo=\"' + "Harry" +'\"';
+    const Http = new XMLHttpRequest();
+    Http.open("GET", url, false); //false for SYNCH request so we can check result
+    Http.send();
+     
+    if (Http.response === "{}"){
+      return false //no entry found for this first name
+    } else {
+      //otherwise, check last name entries:
+      var res = JSON.parse(Http.response)
+      for (var vol in res){
+        if (res[vol].last_name === "Potter"){
+          return vol //return volunteer ID
+        }
+      }
+      return false //did not find any matching last name
+    }
+  });
+
+  if (volunteerExists){
+    var volunteerID = volunteerExists //store existing volunteer id
+    browser.executeScript(function (){
+      const Http = new XMLHttpRequest();
+      Http.open("DELETE", 'https://ecse428-5c703-default-rtdb.firebaseio.com/volunteer/' + arguments[0] + ".json");
+      Http.send();
+    }, volunteerID);
+  } 
+
+  await sleep(1000);
+
+  var volunteerExists = await browser.executeScript(function() {
+    const url='https://ecse428-5c703-default-rtdb.firebaseio.com/volunteer.json?orderBy=\"first_name\"&equalTo=\"' + "Elon" +'\"';
+    const Http = new XMLHttpRequest();
+    Http.open("GET", url, false); //false for SYNCH request so we can check result
+    Http.send();
+     
+    if (Http.response === "{}"){
+      return false //no entry found for this first name
+    } else {
+      //otherwise, check last name entries:
+      var res = JSON.parse(Http.response)
+      for (var vol in res){
+        if (res[vol].last_name === "Musk"){
+          return vol //return volunteer ID
+        }
+      }
+      return false //did not find any matching last name
+    }
+  });
+
+  if (volunteerExists){
+    var volunteerID = volunteerExists //store existing volunteer id
+    browser.executeScript(function (){
+      const Http = new XMLHttpRequest();
+      Http.open("DELETE", 'https://ecse428-5c703-default-rtdb.firebaseio.com/volunteer/' + arguments[0] + ".json");
+      Http.send();
+    }, volunteerID);
+  } 
+
+  await sleep(700);
+
+  
+});
 
 
 Given(/^I am on volunteer signup page$/, async () => {
@@ -52,7 +120,7 @@ When(/^I enter extra profile details$/,async () => {
     await sleep(1000);
 
     var dob = element(by.id('dob'));
-    dob.sendKeys("02/12/2021");
+    dob.sendKeys("1995-11-20");
 
     await sleep(1000);
 
@@ -135,20 +203,21 @@ When(/^I enter no extra profile details$/,async () => {
 
 // 3) Scenario: (Error Flow) I don't successfully create a volunteer account because I input an invalid email
 
+
 When(/^I eneter an existing email$/,async () => {
 
     var firstName = element(by.id('firstName'));
-    firstName.sendKeys("Elon");
+    firstName.sendKeys("Peter");
 
     await sleep(1000);
 
     var lastName = element(by.id('lastName'));
-    lastName.sendKeys("Musk");
+    lastName.sendKeys("Parker");
 
     await sleep(1000);
 
     var emailAddress = element(by.id('emailAddress'));
-    emailAddress.sendKeys("elon.musk@gmail.com");
+    emailAddress.sendKeys("notspidey@gmail.com");
 
     await sleep(1000);
 
