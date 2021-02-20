@@ -74,13 +74,17 @@ export class LoginComponent implements OnInit {
     for (var v of this.volunteers) {
       if (v.email == emailcheck && v.password == passcheck) {
         console.log("Login successful with" + emailcheck);
-        (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: red;'> Succesful login! </span>";
-      } else
-        (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: red;'> Incorrect email or password </span>";
+        (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: green;'> Successful login! </span>";
+        return;
+      }
     }
 
     //check in organizers TODO
 
+
+    // if not found in both volunteers and organizers
+    console.log("Login unsuccessful");
+    (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: red;'> Incorrect email or password </span>";
   }
 
   //Example method to update a volunteer
