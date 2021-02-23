@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { EventRegistrationComponent } from './event-registration/event-registration.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateVolunteerComponent } from './create-volunteer/create-volunteer.component';
@@ -29,6 +30,8 @@ var firebaseConfig = {
     SignupComponent,
     CreateEventComponent,
     CreateVolunteerComponent
+    EventRegistrationComponent,
+    CreateEventComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),

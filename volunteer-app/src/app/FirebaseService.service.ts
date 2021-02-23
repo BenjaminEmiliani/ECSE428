@@ -3,7 +3,8 @@ import { Observable } from "rxjs";
 import { map} from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Organizer } from './model/organizer';
-
+import { Event } from './model/event';
+import { Volunteer } from './model/volunteer';
 @Injectable({
   providedIn: "root",
 })
@@ -15,6 +16,7 @@ export class FirebaseService {
   eventRef: AngularFireList<any>;
   events: Observable<any[]>;
   user: Observable<any>;
+  vol;
 
   
   constructor(private db: AngularFireDatabase) {}
@@ -38,7 +40,7 @@ export class FirebaseService {
   }
 
   // Update volunteer information using userId
-  updateVolunteer(userId, firstName, lastName, phoneNumber, password ): any{
+  updateVolunteer(userId, firstName, lastName, phoneNumber, password): any{
     this.db.object("volunteer/" + userId).update({
       first_name: firstName,
       last_name: lastName,
@@ -61,12 +63,13 @@ export class FirebaseService {
       dob: dob,
       major: major,
       year: year
+      events: [],
+      dev
     });
   }
 
   //Add a new event to the database
   createEvent(name, category, date, stime, etime, organizer, tasks): void{
-  
     // let randomId = Math.floor((Math.random() * 9999) + 1000);;
     // let eventId = name.charAt(0).toLowerCase() + randomId;
     console.log("here");
@@ -77,7 +80,38 @@ export class FirebaseService {
       startTime: stime,
       endTime: etime,
       organizer: organizer,
-      tasks: []
+      tasks: [],
+      volunteers: []
     });
   }
+
+   //Return list of all events in firebase db
+   getEvents(): Observable<any[]> {
+    this.eventRef = this.db.list("event");
+    this.events = this.eventRef
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ id: c.payload.key, ...c.payload.val() }))
+        )
+      );
+    return this.events;
+  }
+
+
+  registerVolunteerEvent(volunteerID, eventList, eventID, volunteerList): boolean {
+
+    
+    this.db.object("volunteer/" + volunteerID).update({
+      events: eventList,
+    });
+
+    this.db.object("event/" + eventID).update({
+      volunteers: volunteerList,
+    });
+
+    return true;
+  } 
+
+
 }
