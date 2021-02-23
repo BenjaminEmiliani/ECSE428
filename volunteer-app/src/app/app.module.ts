@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
-import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
@@ -29,7 +29,7 @@ var firebaseConfig = {
     LoginComponent,
     SignupComponent,
     CreateEventComponent,
-    CreateVolunteerComponent
+    CreateVolunteerComponent,
     EventRegistrationComponent,
     CreateEventComponent
   ],

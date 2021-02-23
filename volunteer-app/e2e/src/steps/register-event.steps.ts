@@ -62,7 +62,7 @@ Given(/^I am a volunteer with ([^\s]*) ([^\s]*) and registered in the system$/, 
       }
       return false //did not find any matching last name
     }
-  });
+  }, firstName, lastName);
 
   if (volunteerExists){
     volunteerID = volunteerExists //store existing volunteer id

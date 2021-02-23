@@ -14,6 +14,6 @@ export class Volunteer {
   public dob: Date;
   public major: string;
   public year: string;
-  public events: []
+  public events: [];
   //public signup_date: string;
 }

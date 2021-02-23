@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { EventRegistrationComponent } from './event-registration/event-registration.component';
 
 const routes: Routes = [
@@ -13,5 +12,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [SignupComponent]
  
