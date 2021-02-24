@@ -49,6 +49,13 @@ export class FirebaseService {
     });
   }
 
+  addTaskToEvent(eventId, newTask): any{
+    this.db.object("event/" + eventId).update({
+      tasks: newTask  
+    });
+  }
+
+
   //Add a new volunteer to the database
   createVolunteer(firstName, lastName, email,  password, phoneNumber, dob, major, year): void{
     let randomId = Math.floor((Math.random() * 9999) + 1000);;
