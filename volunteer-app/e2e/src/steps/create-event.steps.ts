@@ -25,7 +25,7 @@ const sleep = (milliseconds) => {
 
 
 Given(/^I am on the event page$/, async () => {
-  return browser.get(browser.baseUrl);
+  return browser.get(browser.baseUrl + "/create-event");
 });
 
 When(/^requesting the creation of event EventTest, of Category1, on 2021-03-15, from 08:00 AM to 10:00 AM$/, async () => {
@@ -39,10 +39,10 @@ Then(/^event EventTest is created in the system$/, async () => {
 });
 
 Given(/^I am on the event page and want to create an event without category$/, async () => {
-  return browser.get(browser.baseUrl);
+  return browser.get(browser.baseUrl + "/create-event");
 });
 
-When(/^requesting the creation of event EventTest, on 2021-03-15, from 08:00 AM to 10:00 AM$/,async () => {
+When(/^requesting the creation of event EventTest, on 2021-03-15, from 08:00 AM to 10:00 AM$/, async () => {
   await sleep(1000);
   page.newEvent(event.name, "", event.date, event.startTime, event.endTime);
 });
@@ -53,7 +53,7 @@ Then(/^event EventTest without a category is created in the system$/, async () =
 });
 
 Given(/^I am on the event page and want to create an event without a name$/, async () => {
-  return browser.get(browser.baseUrl);
+  return browser.get(browser.baseUrl + "/create-event");
 });
 
 When(/^requesting the creation of event on 2021-03-15, from 08:00 AM to 10:00 AM$/, async () => {

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireDatabase} from "@angular/fire/database";
 import {FirebaseService} from "../FirebaseService.service";
-import { Volunteer } from '../model/volunteer';
-import { Event } from '../model/event';
 
 @Component({
   selector: 'app-event-registration',
@@ -11,7 +9,6 @@ import { Event } from '../model/event';
   styleUrls: ['./event-registration.component.css']
 })
 export class EventRegistrationComponent implements OnInit {
-
   registerForm: FormGroup
   submitted = false
   success = false
