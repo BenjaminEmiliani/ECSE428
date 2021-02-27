@@ -9,10 +9,10 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: ['./src/features/**/*.feature'],
   capabilities: {
-    browserName: 'chrome' //,
-   // chromeOptions: {
-    //  args: ['--headless', '--disable-gpu', '--window-size=800,600', '--no-sandbox']
-   // }
+    browserName: 'chrome' ,
+    chromeOptions: {
+     args: ['--headless', '--disable-gpu', '--window-size=800,600', '--no-sandbox']
+   }
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
