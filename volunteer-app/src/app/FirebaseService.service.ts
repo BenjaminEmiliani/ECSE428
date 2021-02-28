@@ -85,6 +85,16 @@ export class FirebaseService {
     });
   }
 
+  getEvent(eid): Observable<any> {
+    return this.db.object("event/" + eid).snapshotChanges()
+    .pipe(map(snap => {
+      if(snap.payload.exists()) {
+        const obj = snap.payload.val();
+        return obj;
+      }
+    }));
+  }
+
    //Return list of all events in firebase db
    getEvents(): Observable<any[]> {
     this.eventRef = this.db.list("event");
@@ -99,7 +109,8 @@ export class FirebaseService {
   }
 
   // need to fix
-  getEventsForVolunteer(id: String) : Observable<any[]> {
+  getEventsForVolunteer(userid: string) : Observable<any[]> {
+    // var volunteer = this.getVolunteer(userid);
     this.volunteerEventsRef = this.db.list("event");
     this.volunteerEvents = this.volunteerEventsRef
       .snapshotChanges()
@@ -125,6 +136,19 @@ export class FirebaseService {
 
     return true;
   } 
+
+  unregisterVolunteerFromEvent(volunteerid, eventid, eventlist, volunteerlist): boolean {
+
+    this.db.object(`volunteer/${volunteerid}`).update({
+      events: eventlist,
+    });
+
+    this.db.object(`event/${eventid}`).update({
+      volunteers: volunteerlist
+    });
+
+    return true;
+  }
 
 
 }
