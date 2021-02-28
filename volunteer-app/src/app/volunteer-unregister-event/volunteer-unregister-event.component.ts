@@ -13,21 +13,21 @@ import { Volunteer } from './../model/volunteer';
 
 export class VolunteerUnregisterEventComponent implements OnInit {
 
-  unregisterForm: FormGroup
-  submitted = false
-  success = false
-  message = ""
-  volunteers = []
+  unregisterForm: FormGroup;
+  submitted = false;
+  success = false;
+  message = "";
+  volunteers = [];
   private vEventsObservable; 
-  vEvents = []
-  vEventsFor = []
-  maxOptionsLimit = 100
+  vEvents: any = [];
+  vEventsFor = [];
+  maxOptionsLimit = 100;
 
 
   constructor(private db: AngularFireDatabase, private firebase: FirebaseService, private formBuilder: FormBuilder) { }
 
   // @Input() userId: string;
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
 
     this.unregisterForm = this.formBuilder.group({
       event: [null, [Validators.required ]]
@@ -35,20 +35,14 @@ export class VolunteerUnregisterEventComponent implements OnInit {
 
     // get initial volunteer events
     this.vEventsObservable = this.firebase.getEventsForVolunteer("sh9930");
-    this.vEventsObservable.subscribe(async (snapshots) => {
+    this.vEventsObservable.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-       this.vEvents.push(snapshot); 
+        if(snapshot.volunteers.includes("sh9930"))
+       this.vEventsFor.push(snapshot); 
       });
     });
 
-    console.log(this.vEvents);
-
-    this.vEvents.forEach(e => {
-      console.log(e.volunteers);
-      // if (e.volunteers.includes("sh9930")) {
-      //   this.vEventsFor.push(e);
-      // }
-    })
+    
     // this.firebase.getEventsForVolunteer("sh9930").subscribe(
     //   (events) => {
     //     console.log(events.length + " events");
@@ -66,6 +60,14 @@ export class VolunteerUnregisterEventComponent implements OnInit {
 
   }
 
+  log(){
+    
+    this.vEvents.forEach(e => {
+      console.log("e.name");
+      console.log(e.name);
+     })
+ 
+  }
   submit() {
     // this.submitted = true
     // console.log(this.unregisterForm.value)
