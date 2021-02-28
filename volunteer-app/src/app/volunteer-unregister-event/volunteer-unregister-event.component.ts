@@ -34,21 +34,21 @@ export class VolunteerUnregisterEventComponent implements OnInit {
     });
 
     // get initial volunteer events
-    this.vEventsObservable = this.firebase.getEventsForVolunteer("sh9930");
+    this.vEventsObservable = this.firebase.getEventsForVolunteer("sh2327");
     this.vEventsObservable.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-        if(snapshot.volunteers.includes("sh9930"))
+        if(snapshot.volunteers.includes("sh2327"))
        this.vEventsFor.push(snapshot); 
       });
     });
 
     
-    // this.firebase.getEventsForVolunteer("sh9930").subscribe(
+    // this.firebase.getEventsForVolunteer("sh2327").subscribe(
     //   (events) => {
     //     console.log(events.length + " events");
     //     var lim = (events.length> this.maxOptionsLimit) ? this.maxOptionsLimit : events.length
     //     for(var i = 0; i < lim; i++) {
-    //       if(events[i].volunteers.contains("sh9930")) {
+    //       if(events[i].volunteers.contains("sh2327")) {
     //         this.vEvents.push({
     //           id: events[i].id, 
     //           name: events[i].name,
@@ -69,37 +69,56 @@ export class VolunteerUnregisterEventComponent implements OnInit {
  
   }
   submit() {
-    // this.submitted = true
-    // console.log(this.unregisterForm.value)
-    // if (this.unregisterForm.invalid){
-    //   // data validation prompts are already done in html
-    //   return;
-    // } else {
-    //   this.unregister()
-    // }
+    this.submitted = true
+    if (this.unregisterForm.invalid){
+      // data validation prompts are already done in html
+      return;
+    } else {
+      this.unregister()
+    }
     
   }
 
   test(): void {
-    this.firebase.getEventsForVolunteer("sh9930");
+    var vEvents = this.vEventsFor.filter(e => e.id !== "-MUdvkq2gUXFNZs8SgUF");
+    const vEventsIds = [];
+    vEvents.forEach(e => vEventsIds.push(e.id));
+    console.log(vEventsIds);
+    
   }
 
   unregister(): void {
-    // this.success = true;
+    this.success = true;
 
-    // var volunteerId = "sh9930"; // need to change
-    // var eventId = this.unregisterForm.controls.event.value;
+    var volunteerId = "sh2327"; // need to change
+    var eventId = this.unregisterForm.controls.event.value;
 
-    // var volunteerEvents = this.vEvents.filter(e => e.id !== eventId);
+    // console.log(this.vEventsFor);
+    var vEvents = this.vEventsFor.filter(e => e.id !== eventId);
+    
+    if (vEvents === this.vEventsFor) {
+      this.success = false;
+      this.message = "You are not registered to this event!"
+      return;
+    }
 
-    // if (volunteerEvents === this.vEvents) {
-    //   this.success = false;
-    //   this.message = "You are not registered to this event!"
-    //   return;
-    // }
+    var vEventsIds = [];
+    vEvents.forEach(e => vEventsIds.push(e.id));
+    // console.log(vEventsIds);
 
-    // var eventVolunteers;
-    // this.firebase.getEvent(eventId).subscribe(res => eventVolunteers = res.volunteers)
+    var eVolunteers;
+    this.firebase.getEvent(eventId)
+    .subscribe(event => {
+      eVolunteers = event.volunteers.filter(vId => vId !== volunteerId);
+      console.log(eVolunteers);
+      if (this.success) {
+        this.firebase.unregisterVolunteerFromEvent(volunteerId, eventId, vEventsIds, eVolunteers);
+        this.message = "Successfully unregistered from event!"
+      } else {
+        this.message = "Error: Unable to unregister from event"
+      }  
+    });
+    
   }
 
 }

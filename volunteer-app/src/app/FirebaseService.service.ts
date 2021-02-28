@@ -38,7 +38,7 @@ export class FirebaseService {
 
   //Return a volunteer in firebase db using its userId
   getVolunteer(userId): Observable<any> {
-    return this.db.object("volunteer/" + userId).valueChanges();
+    return this.db.object("volunteer/" + userId).snapshotChanges();
   }
 
   // Update volunteer information using userId
@@ -86,13 +86,7 @@ export class FirebaseService {
   }
 
   getEvent(eid): Observable<any> {
-    return this.db.object("event/" + eid).snapshotChanges()
-    .pipe(map(snap => {
-      if(snap.payload.exists()) {
-        const obj = snap.payload.val();
-        return obj;
-      }
-    }));
+    return this.db.object("event/" + eid).valueChanges();
   }
 
    //Return list of all events in firebase db
