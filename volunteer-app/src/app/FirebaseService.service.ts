@@ -15,6 +15,8 @@ export class FirebaseService {
   volunteers: Observable<any[]>;
   eventRef: AngularFireList<any>;
   events: Observable<any[]>;
+  volunteerEventsRef: AngularFireList<any>;
+  volunteerEvents: Observable<any>;
   user: Observable<any>;
   vol;
 
@@ -94,6 +96,19 @@ export class FirebaseService {
         )
       );
     return this.events;
+  }
+
+  // need to fix
+  getEventsForVolunteer(id: String) : Observable<any[]> {
+    this.volunteerEventsRef = this.db.list("event");
+    this.volunteerEvents = this.volunteerEventsRef
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ id: c.payload.key, ...c.payload.val() }))
+        )
+      );
+    return this.volunteerEvents;
   }
 
 

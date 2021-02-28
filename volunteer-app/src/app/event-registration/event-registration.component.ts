@@ -51,9 +51,8 @@ export class EventRegistrationComponent implements OnInit {
     // get initial events
     this.events = []
     //temp commented out bc of overwhelmed # of events in db)
-    /*this.firebase.getEvents().subscribe(
+    this.firebase.getEvents().subscribe(
       (events) => {
-     //   console.log(events)
         console.log(events.length + " events");
         var lim = (events.length> this.maxOptionsLimit) ? this.maxOptionsLimit : events.length
         for(var i=0; i<lim; i++){
@@ -63,7 +62,7 @@ export class EventRegistrationComponent implements OnInit {
             volunteers: events[i].volunteers,
           })
         }
-    });*/
+    });
   }
 
   // this function is called when the user clicks "Register for Event" button to submit the form
