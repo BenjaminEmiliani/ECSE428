@@ -14,6 +14,7 @@ import { CreateVolunteerComponent } from './create-volunteer/create-volunteer.co
 import { AddEventTasksComponent } from './add-event-tasks/add-event-tasks.component';
 
 import { VolunteerUnregisterEventComponent } from './volunteer-unregister-event/volunteer-unregister-event.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 import { AssignTaskComponent } from './assign-task/assign-task.component';
 
@@ -39,6 +40,7 @@ var firebaseConfig = {
     EventRegistrationComponent,
     CreateEventComponent,
     VolunteerUnregisterEventComponent,
+    HomepageComponent,
     AssignTaskComponent,
     AddEventTasksComponent
   ],
