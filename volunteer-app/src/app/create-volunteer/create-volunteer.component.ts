@@ -50,16 +50,12 @@ export class CreateVolunteerComponent implements OnInit {
       this.firebase.createVolunteer(firstName, lastName, emailAddress, password, phoneNumber, dob);
       console.log("SUCCESS ACCOUNT CREATED");
       (<HTMLInputElement>document.getElementById("display")).innerHTML = 'Acount Successfully Created';
-      // alert('Success');
     }else{
       console.log("ERROR ACCOUNT EXISTS");
       (<HTMLInputElement>document.getElementById("display")).innerHTML = 'Error: Email Already Exists';
-      // alert('Failed');
     }
  
   }
-
-
 
   checkVolunteerExists(email): any{
 
