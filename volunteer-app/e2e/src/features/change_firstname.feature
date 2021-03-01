@@ -1,3 +1,4 @@
+# Example/Test feature
 # Feature: Change first name
 
 #   As a volunteer I want to change my name so I it can be correct
