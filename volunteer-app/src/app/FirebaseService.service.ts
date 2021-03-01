@@ -50,7 +50,7 @@ export class FirebaseService {
   }
 
   //Add a new volunteer to the database
-  createVolunteer(firstName, lastName, email,  password, phoneNumber, dob, major, year): void{
+  createVolunteer(firstName, lastName, email,  password, phoneNumber, dob): void{
     let randomId = Math.floor((Math.random() * 9999) + 1000);;
     let userId = firstName.charAt(0).toLowerCase() + lastName.charAt(0).toLowerCase() + randomId;
     console.log("here");
@@ -61,9 +61,6 @@ export class FirebaseService {
       password: password,
       email: email,
       dob: dob,
-      major: major,
-      year: year,
-      events: [],
     });
   }
 
@@ -98,18 +95,11 @@ export class FirebaseService {
 
 
   registerVolunteerEvent(volunteerID, eventList, eventID, volunteerList): boolean {
-
-    
-    this.db.object("volunteer/" + volunteerID).update({
-      events: eventList,
-    });
-
     this.db.object("event/" + eventID).update({
       volunteers: volunteerList,
     });
 
     return true;
   } 
-
 
 }
