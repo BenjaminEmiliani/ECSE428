@@ -4,6 +4,7 @@ import { AngularFireDatabase} from "@angular/fire/database";
 import { FirebaseService } from "../FirebaseService.service";
 import { Observable } from 'rxjs';
 import { Volunteer } from './../model/volunteer';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-volunteer-unregister-event',
@@ -22,22 +23,24 @@ export class VolunteerUnregisterEventComponent implements OnInit {
   vEvents: any = [];
   vEventsFor = [];
   maxOptionsLimit = 100;
+  userId: any;
 
+  constructor(private firebase: FirebaseService, private formBuilder: FormBuilder, private route: ActivatedRoute) { }
 
-  constructor(private db: AngularFireDatabase, private firebase: FirebaseService, private formBuilder: FormBuilder) { }
-
-  // @Input() userId: string;
+  
   ngOnInit(): void {
+
+    this.userId = this.route.snapshot.paramMap.get('uid');
 
     this.unregisterForm = this.formBuilder.group({
       event: [null, [Validators.required ]]
     });
 
     // get initial volunteer events
-    this.vEventsObservable = this.firebase.getEventsForVolunteer("sh2327");
+    this.vEventsObservable = this.firebase.getEventsForVolunteer(this.userId);
     this.vEventsObservable.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-        if(snapshot.volunteers.includes("sh2327"))
+        if(snapshot.volunteers.includes(this.userId))
        this.vEventsFor.push(snapshot); 
       });
     });
@@ -60,14 +63,7 @@ export class VolunteerUnregisterEventComponent implements OnInit {
 
   }
 
-  log(){
-    
-    this.vEvents.forEach(e => {
-      console.log("e.name");
-      console.log(e.name);
-     })
- 
-  }
+
   submit() {
     this.submitted = true
     if (this.unregisterForm.invalid){
@@ -90,7 +86,6 @@ export class VolunteerUnregisterEventComponent implements OnInit {
   unregister(): void {
     this.success = true;
 
-    var volunteerId = "sh2327"; // need to change
     var eventId = this.unregisterForm.controls.event.value;
 
     // console.log(this.vEventsFor);
@@ -109,10 +104,10 @@ export class VolunteerUnregisterEventComponent implements OnInit {
     var eVolunteers;
     this.firebase.getEvent(eventId)
     .subscribe(event => {
-      eVolunteers = event.volunteers.filter(vId => vId !== volunteerId);
+      eVolunteers = event.volunteers.filter(vId => vId !== this.userId);
       console.log(eVolunteers);
       if (this.success) {
-        this.firebase.unregisterVolunteerFromEvent(volunteerId, eventId, vEventsIds, eVolunteers);
+        this.firebase.unregisterVolunteerFromEvent(this.userId, eventId, vEventsIds, eVolunteers);
         this.message = "Successfully unregistered from event!"
       } else {
         this.message = "Error: Unable to unregister from event"

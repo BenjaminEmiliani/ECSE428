@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 import { Organizer } from './model/organizer';
 import { Event } from './model/event';
 import { Volunteer } from './model/volunteer';
+import { stringify } from "@angular/compiler/src/util";
 @Injectable({
   providedIn: "root",
 })
@@ -18,7 +19,8 @@ export class FirebaseService {
   volunteerEventsRef: AngularFireList<any>;
   volunteerEvents: Observable<any>;
   user: Observable<any>;
-  vol;
+  vols = [];
+  
 
   
   constructor(private db: AngularFireDatabase) {}
@@ -39,6 +41,18 @@ export class FirebaseService {
   //Return a volunteer in firebase db using its userId
   getVolunteer(userId): Observable<any> {
     return this.db.object("volunteer/" + userId).snapshotChanges();
+  }
+
+  getUserIdByEmail(emailcheck):String {
+   var id: String;
+    this.getVolunteers();
+    this.volunteers.subscribe(snapshots => {
+      snapshots.forEach(snapshot => {
+        if(snapshot.email == emailcheck)
+       id = snapshot;
+      });
+    });
+    return id;
   }
 
   // Update volunteer information using userId
