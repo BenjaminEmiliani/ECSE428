@@ -18,6 +18,8 @@ export class FirebaseService {
   volunteerEventsRef: AngularFireList<any>;
   volunteerEvents: Observable<any>;
   user: Observable<any>;
+  tasks: Observable<any[]>;
+  taskRef: AngularFireList<any>;
   vol;
 
   
@@ -52,8 +54,15 @@ export class FirebaseService {
   }
 
   addTaskToEvent(eventId, newTask): any{
-    this.db.object("event/" + eventId).update({
-      tasks: newTask  
+    this.db.list("event/" + eventId + "/tasks").push({
+      name: newTask  
+    });
+  }
+
+  assignVolunteerToTask(eventId, taskId, volunteerId): any {
+    
+    this.db.object("event/" + eventId + "/tasks/" + taskId).update({
+      volunteer: volunteerId
     });
   }
 
@@ -91,6 +100,18 @@ export class FirebaseService {
 
   getEvent(eid): Observable<any> {
     return this.db.object("event/" + eid).valueChanges();
+  }
+
+  getTasks(eid): Observable<any[]> {
+    this.taskRef = this.db.list("event/" + eid + "/tasks");
+    this.tasks = this.taskRef
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ id: c.payload.key, ...c.payload.val() }))
+        )
+      );
+    return this.tasks;
   }
 
    //Return list of all events in firebase db
