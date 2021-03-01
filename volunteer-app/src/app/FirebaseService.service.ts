@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
 import { Organizer } from './model/organizer';
 import { Event } from './model/event';
 import { Volunteer } from './model/volunteer';
-import { stringify } from "@angular/compiler/src/util";
+
 @Injectable({
   providedIn: "root",
 })
