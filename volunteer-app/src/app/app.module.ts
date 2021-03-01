@@ -11,7 +11,11 @@ import { EventRegistrationComponent } from './event-registration/event-registrat
 import { CreateEventComponent } from './create-event/create-event.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateVolunteerComponent } from './create-volunteer/create-volunteer.component';
+
 import { VolunteerUnregisterEventComponent } from './volunteer-unregister-event/volunteer-unregister-event.component';
+
+import { AssignTaskComponent } from './assign-task/assign-task.component';
+
 
 var firebaseConfig = {
   apiKey: "AIzaSyAxq4Bb-wcQ3Hmg-8lqMqaXciTpd699Jw0",
@@ -33,7 +37,8 @@ var firebaseConfig = {
     CreateVolunteerComponent,
     EventRegistrationComponent,
     CreateEventComponent,
-    VolunteerUnregisterEventComponent
+    VolunteerUnregisterEventComponent,
+    AssignTaskComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
