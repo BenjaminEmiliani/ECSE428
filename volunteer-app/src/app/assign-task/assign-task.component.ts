@@ -43,8 +43,8 @@ export class AssignTaskComponent implements OnInit {
         }
     });
 
-    this.events = [];
-    /*this.firebase.getEvents().subscribe(
+    //this.events = [];
+    this.firebase.getEvents().subscribe(
       (events) => {
      //   console.log(events)
         console.log(events.length + " events");
@@ -56,7 +56,7 @@ export class AssignTaskComponent implements OnInit {
             volunteers: events[i].volunteers,
           })
         }
-    });*/
+    });
     
   }
 
