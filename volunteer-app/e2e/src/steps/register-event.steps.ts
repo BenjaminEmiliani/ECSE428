@@ -144,19 +144,19 @@ When(/^I am on the event registration page$/, async () => {
 });
 
 When(/^I choose to register for the event .*$/, async () => {
-  //select the volunteer
-  element(by.id(volunteerID)).click();
-  await browser.sleep(sleeptime);
+  // //select the volunteer
+  // element(by.id(volunteerID)).click();
+  // await browser.sleep(sleeptime);
 
-  //select the event
-  element(by.id("test-event")).click();
-  await browser.sleep(sleeptime);
+  // //select the event
+  // element(by.id("test-event")).click();
+  // await browser.sleep(sleeptime);
 
-  //click to register
-  var btn = element(by.id('submit-button'));
-  await browser.sleep(sleeptime);
-  btn.click();
-  await browser.sleep(sleeptime);
+  // //click to register
+  // var btn = element(by.id('submit-button'));  
+  // await browser.sleep(sleeptime);
+  // btn.click();
+  // await browser.sleep(sleeptime);
 });
 
 //TODO CHECK PARTICIPANTS LIST
