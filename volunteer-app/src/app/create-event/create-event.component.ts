@@ -58,6 +58,7 @@ export class CreateEventComponent implements OnInit {
     var eEndTime= this.f.endTime.value;
     var eDate= this.f.date.value;
     var eOrganizer= this.f.organizer.value;
+    var etasks = [];
     
     this.createdEvent = true;
 

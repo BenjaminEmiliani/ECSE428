@@ -15,6 +15,8 @@ export class FirebaseService {
   volunteers: Observable<any[]>;
   eventRef: AngularFireList<any>;
   events: Observable<any[]>;
+  volunteerEventsRef: AngularFireList<any>;
+  volunteerEvents: Observable<any>;
   user: Observable<any>;
   vol;
 
@@ -36,7 +38,7 @@ export class FirebaseService {
 
   //Return a volunteer in firebase db using its userId
   getVolunteer(userId): Observable<any> {
-    return this.db.object("volunteer/" + userId).valueChanges();
+    return this.db.object("volunteer/" + userId).snapshotChanges();
   }
 
   // Update volunteer information using userId
@@ -80,6 +82,10 @@ export class FirebaseService {
     });
   }
 
+  getEvent(eid): Observable<any> {
+    return this.db.object("event/" + eid).valueChanges();
+  }
+
    //Return list of all events in firebase db
    getEvents(): Observable<any[]> {
     this.eventRef = this.db.list("event");
@@ -93,6 +99,20 @@ export class FirebaseService {
     return this.events;
   }
 
+  // need to fix
+  getEventsForVolunteer(userid: string) : Observable<any[]> {
+    // var volunteer = this.getVolunteer(userid);
+    this.volunteerEventsRef = this.db.list("event");
+    this.volunteerEvents = this.volunteerEventsRef
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ id: c.payload.key, ...c.payload.val() }))
+        )
+      );
+    return this.volunteerEvents;
+  }
+
 
   registerVolunteerEvent(volunteerID, eventList, eventID, volunteerList): boolean {
     this.db.object("event/" + eventID).update({
@@ -101,5 +121,19 @@ export class FirebaseService {
 
     return true;
   } 
+
+
+  unregisterVolunteerFromEvent(volunteerid, eventid, eventlist, volunteerlist): boolean {
+
+    this.db.object(`volunteer/${volunteerid}`).update({
+      events: eventlist,
+    });
+
+    this.db.object(`event/${eventid}`).update({
+      volunteers: volunteerlist
+    });
+
+    return true;
+  }
 
 }
