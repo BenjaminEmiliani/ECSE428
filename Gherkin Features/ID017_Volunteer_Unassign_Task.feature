@@ -1,33 +1,22 @@
 # Backlog item ID017 | ECSE 428 Group 3 | Arianit Vavla, 260868601
 Feature: Volunteer unassigns from event
-As a Volunteer, I want to be able to unassign myself from an event so that I would be able to change my plans.
+As a Volunteer, I want to be able to unassign myself from an event 
+so that I would be able to change my plans.
 
 
-Scenario Outline: Unassign myself from an event (Normal Flow)
+Scenario Outline: Unregister myself from an event (Normal Flow)
 
 Given I am logged in as Volunteer
-When I unregister from event <EventName>
-Then the event <EventName> is removed from my list of events
+When I reqeust to unregister from event <EventName>
+Then a message indicating unsuccessful registration is issued
 
 Examples:
 	| EventName |
 	| FoodDrive |
 
 
-Scenario Outline: Unassign myself from multiple events (Alternative Flow)
+Scenario Outline: Attempt to unregister from event without select one (Error Flow)
 
 Given I am logged in as Volunteer
-When I request to unregister from event <EventName1>
-And I request to unregister from event <EventName2> 
-Then the events <EventName1> and <EventName2> are removed from my list of events
-
-Examples:
-	| EventName1 | EventName2 |
-	| FoodDrive  | McHacks    |
-
-
-Scenario Outline: Unassign myself from event I am not registered to (Error Flow)
-
-Given I am logged in as Volunteer
-When I request to unregister from event <EventName1> which I am not registered to 
+When I request to unregister without selecting an event
 Then an error message is issued
