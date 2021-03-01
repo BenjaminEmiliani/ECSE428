@@ -76,5 +76,28 @@ export class AddEventTasksComponent implements OnInit {
   }
 
 
+  getEventTasks(){
+
+    var eventId = this.registerForm.controls.eventtask.value
+
+    var currentTasks;
+
+    //find the tasks of the event selected and append the new task
+    this.all_events.forEach(item => {
+
+      if(item.id.match(eventId)){
+        currentTasks = item.tasks;
+
+      }  
+
+    });
+
+    console.log(currentTasks);
+
+    return currentTasks;
+
+  }
+
+
 
 }
