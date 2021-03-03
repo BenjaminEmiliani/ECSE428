@@ -17,6 +17,9 @@ Intall the dependecies with command `npm install`
 ## Run the Application Locally
 `ng serve --open`
 
+## Run all end-to-end Gherkin tests
+`ng e2e`
+
 ## Creating New Components
 In terminal or command line prompt open the project user_path/ECSE428/volunteer-app
 

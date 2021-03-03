@@ -2,22 +2,29 @@
 
 <form [formGroup]="registerForm" (ngSubmit)="submit()">
     <div>
-        <select formControlName="volunteer" style="padding:3px; margin:5px; min-width:10%">
+        <select id='volunteer-id' formControlName="volunteer" style="padding:3px; margin:5px; min-width:10%">
             <option [ngValue]="null" disabled>Select Volunteer</option>
-            <option *ngFor="let volunteer of volunteers" [ngValue]="volunteer.id"> {{ volunteer.name }} (ID={{ volunteer.id }})</option>
+            <option *ngFor="let volunteer of volunteers" [ngValue]="volunteer.id" [id]="volunteer.id"> {{ volunteer.name }} </option>
         </select>
-        <div *ngIf="submitted && !registerForm.controls.volunteer?.valid" style="font-size:smaller;color:red">*required</div>
+        <div id="required-volunter-id" *ngIf="submitted && !registerForm.controls.volunteer?.valid" style="font-size:smaller;color:red">*required</div>
     </div>
     <div>
-        <select formControlName="event" style="padding:3px; margin:5px; min-width:10%">
+        <select id='event-id' formControlName="event" style="padding:3px; margin:5px; min-width:10%">
             <option [ngValue]="null" disabled>Select Event</option>
-            <option *ngFor="let event of events" [ngValue]="event.id"> {{ event.name }} (ID={{ event.id }})</option>
+
+            <option *ngFor="let event of events" [ngValue]="event.id"> {{ event.name }} </option>
+            <option id="test-event" value="null"> Test Event</option>
+
         </select>
-        <div *ngIf="submitted && !registerForm.controls.event?.valid" style="font-size:smaller;color:red">*required</div>
+        <div id="required-event-id" *ngIf="submitted && !registerForm.controls.event?.valid" style="font-size:smaller;color:red">*required</div>
     </div>
     
-    <button type="submit" style="padding:3px; margin:5px">Register for Event</button>
+    <button id='submit-button' type="submit" style="padding:3px; margin:5px">Register for Event</button>
+    <div id="message" *ngIf="submitted && !success" style="font-size:smaller;color:red">{{message}}</div>
+    <div id="success-message" *ngIf="submitted && success" style="font-size:smaller;color:green">{{message}}</div>
 </form>
+
+<!--<button (click)="test()" style="padding:3px; margin:5px">Test Button</button> -->
 
 <nav>
     <a routerLink="">Return to homepage</a>
