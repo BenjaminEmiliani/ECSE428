@@ -22,7 +22,8 @@ export class CreateOrganizerComponent implements OnInit {
     "lastName": new FormControl("", Validators.required),
     "emailAddress": new FormControl("", [Validators.required, Validators.email]),
     "password": new FormControl("", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]),
-    "phoneNumber": new FormControl("", Validators.pattern(/^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/))
+    "phoneNumber": new FormControl("", Validators.pattern(/^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/)),
+    "dob": new FormControl("")
   });
   constructor(private db: AngularFireDatabase, private firebase: FirebaseService) { }
 
@@ -38,9 +39,10 @@ export class CreateOrganizerComponent implements OnInit {
   var emailAddress = (<HTMLInputElement>document.getElementById("emailAddress")).value;
   var password = (<HTMLInputElement>document.getElementById("password")).value;
   var phoneNumber = (<HTMLInputElement>document.getElementById("phoneNumber")).value;
+  var dob = (<HTMLInputElement>document.getElementById("dob")).value;
 
   if(this.checkOrganizerExists(emailAddress) === false){
-    this.firebase.createOrganizer(firstName, lastName, emailAddress, password, phoneNumber);
+    this.firebase.createOrganizer(firstName, lastName, emailAddress, password, phoneNumber, dob);
     console.log("SUCCESS ACCOUNT CREATED");
     (<HTMLInputElement>document.getElementById("display")).innerHTML = 'Account Successfully Created';
     // alert('Success');

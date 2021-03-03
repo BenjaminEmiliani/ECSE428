@@ -1,4 +1,6 @@
+<h2>Create New Organizer Account</h2>
 <form [formGroup]="form" (ngSubmit)="createOrganizerAccount()">
+    <h2>Organizer Signup</h2>
     <p>
         <label>First Name:</label>
         <input id="firstName" name="firstName" type="text" formControlName="firstName">
@@ -18,6 +20,10 @@
     <p>
         <label>Phone Number:</label>
         <input id="phoneNumber" name="phoneNumber" type="tel" formControlName="phoneNumber">
+    </p>
+    <p>
+        <label>dob:</label>
+        <input id="dob" name="dob" type="date" formControlName="dob">
     </p>
     <p>
         <button class="btn signup-organizer-btn" id="submit" type="submit" [disabled]="!form.valid">Submit</button>
