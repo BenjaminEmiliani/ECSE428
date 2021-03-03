@@ -82,9 +82,5 @@ export class AppPage {
   
     btn.click();
     btn.click();
-
-    
-    
-    
   }
 }

@@ -24,9 +24,7 @@ export class CreateVolunteerComponent implements OnInit {
     "emailAddress": new FormControl("", [Validators.required, Validators.email]),
     "password": new FormControl("", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)]),
     "phoneNumber": new FormControl("", Validators.pattern(/^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/)),
-    "dob": new FormControl(""),
-    "major": new FormControl(""),
-    "year": new FormControl("")
+    "dob": new FormControl("")
 });
 
   constructor(private db: AngularFireDatabase, private firebase: FirebaseService) { }
@@ -47,23 +45,17 @@ export class CreateVolunteerComponent implements OnInit {
     var password = (<HTMLInputElement>document.getElementById("password")).value;
     var phoneNumber = (<HTMLInputElement>document.getElementById("phoneNumber")).value;
     var dob = (<HTMLInputElement>document.getElementById("dob")).value;
-    var major = (<HTMLInputElement>document.getElementById("major")).value;
-    var year = (<HTMLInputElement>document.getElementById("year")).value;
-
+ 
     if(this.checkVolunteerExists(emailAddress) === false){
-      this.firebase.createVolunteer(firstName, lastName, emailAddress, password, phoneNumber, dob, major, year);
+      this.firebase.createVolunteer(firstName, lastName, emailAddress, password, phoneNumber, dob);
       console.log("SUCCESS ACCOUNT CREATED");
       (<HTMLInputElement>document.getElementById("display")).innerHTML = 'Acount Successfully Created';
-      // alert('Success');
     }else{
       console.log("ERROR ACCOUNT EXISTS");
       (<HTMLInputElement>document.getElementById("display")).innerHTML = 'Error: Email Already Exists';
-      // alert('Failed');
     }
  
   }
-
-
 
   checkVolunteerExists(email): any{
 

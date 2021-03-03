@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 import { Organizer } from './model/organizer';
 import { Event } from './model/event';
 import { Volunteer } from './model/volunteer';
+
 @Injectable({
   providedIn: "root",
 })
@@ -15,8 +16,11 @@ export class FirebaseService {
   volunteers: Observable<any[]>;
   eventRef: AngularFireList<any>;
   events: Observable<any[]>;
+  volunteerEventsRef: AngularFireList<any>;
+  volunteerEvents: Observable<any>;
   user: Observable<any>;
-  vol;
+  vols = [];
+  
 
   
   constructor(private db: AngularFireDatabase) {}
@@ -36,7 +40,19 @@ export class FirebaseService {
 
   //Return a volunteer in firebase db using its userId
   getVolunteer(userId): Observable<any> {
-    return this.db.object("volunteer/" + userId).valueChanges();
+    return this.db.object("volunteer/" + userId).snapshotChanges();
+  }
+
+  getUserIdByEmail(emailcheck):String {
+   var id: String;
+    this.getVolunteers();
+    this.volunteers.subscribe(snapshots => {
+      snapshots.forEach(snapshot => {
+        if(snapshot.email == emailcheck)
+       id = snapshot;
+      });
+    });
+    return id;
   }
 
   // Update volunteer information using userId
@@ -49,11 +65,17 @@ export class FirebaseService {
     });
   }
 
+  addTaskToEvent(eventId, newTask): any{
+    this.db.object("event/" + eventId).update({
+      tasks: newTask  
+    });
+  }
+
+
   //Add a new volunteer to the database
-  createVolunteer(firstName, lastName, email,  password, phoneNumber, dob, major, year): void{
-    let randomId = Math.floor((Math.random() * 9999) + 1000);;
+  createVolunteer(firstName, lastName, email,  password, phoneNumber, dob): void{
+    let randomId = Math.floor((Math.random() * 9000) + 1000);;
     let userId = firstName.charAt(0).toLowerCase() + lastName.charAt(0).toLowerCase() + randomId;
-    console.log("here");
     this.db.object("volunteer/" + userId).update({
       first_name: firstName,
       last_name: lastName,
@@ -61,17 +83,28 @@ export class FirebaseService {
       password: password,
       email: email,
       dob: dob,
-      major: major,
-      year: year,
-      events: [],
+    });
+  }
+
+  //Add a new volunteer to the database
+  createOrganizer(firstName, lastName, email,  password, phoneNumber, dob): void{
+    let randomId = Math.floor((Math.random() * 9999) + 1000);;
+    let userId = firstName.charAt(0).toLowerCase() + lastName.charAt(0).toLowerCase() + randomId;
+    this.db.object("organizer/" + userId).update({
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phoneNumber,
+      password: password,
+      email: email,
+      dob: dob,
     });
   }
 
   //Add a new event to the database
   createEvent(name, category, date, stime, etime, organizer, tasks): void{
-    // let randomId = Math.floor((Math.random() * 9999) + 1000);;
-    // let eventId = name.charAt(0).toLowerCase() + randomId;
-    this.db.list("event/").push({
+     let randomId = Math.floor((Math.random() * 9000) + 1000);;
+     let eventId = name + randomId;
+    this.db.object("event/"+ eventId).update({
       name: name,
       category: category,
       date: date,
@@ -81,6 +114,10 @@ export class FirebaseService {
       tasks: [],
       volunteers: []
     });
+  }
+
+  getEvent(eid): Observable<any> {
+    return this.db.object("event/" + eid).valueChanges();
   }
 
    //Return list of all events in firebase db
@@ -98,18 +135,16 @@ export class FirebaseService {
 
 
   registerVolunteerEvent(volunteerID, eventList, eventID, volunteerList): boolean {
-
-    
-    this.db.object("volunteer/" + volunteerID).update({
-      events: eventList,
-    });
-
     this.db.object("event/" + eventID).update({
       volunteers: volunteerList,
     });
-
     return true;
   } 
 
-
+  unregisterVolunteerFromEvent(eventid, volunteerlist): boolean {
+    this.db.object(`event/${eventid}`).update({
+      volunteers: volunteerlist
+    });
+    return true;
+  }
 }

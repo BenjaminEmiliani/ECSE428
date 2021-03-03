@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireDatabase } from "@angular/fire/database";
 import { Volunteer } from "../model/volunteer";
 import { FirebaseService } from "../FirebaseService.service"
@@ -11,20 +12,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  user: any;
+  userId : String = "";
   model = new Volunteer();
   volunteers = []
   loginForm: FormGroup;
   submitted = false;
+  isEnabled;
+ 
 
-  constructor(private db: AngularFireDatabase, private firebase: FirebaseService, private formBuilder: FormBuilder) { }
+  constructor(private db: AngularFireDatabase, private firebase: FirebaseService, private formBuilder: FormBuilder, private r: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.user = this.firebase.getVolunteer("jd3291")
-      .subscribe((element) => {
-        this.user = element;
-      });
-
     this.loginForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required]],
@@ -39,6 +37,7 @@ export class LoginComponent implements OnInit {
           this.volunteers.push({
             password: volunteers[i].password,
             email: volunteers[i].email,
+            userid: volunteers[i]
           })
         }
       });
@@ -73,22 +72,21 @@ export class LoginComponent implements OnInit {
     //check in volunteers
     for (var v of this.volunteers) {
       if (v.email == emailcheck && v.password == passcheck) {
+        this.userId = v.userid.id;
+        this.router.navigate(['/homepage', {uid: this.userId}]);
         console.log("Login successful with" + emailcheck);
-        (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: red;'> Succesful login! </span>";
-      } else
-        (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: red;'> Incorrect email or password </span>";
+        (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: green;'> Successful login! </span>";
+        return;
+      }
     }
 
     //check in organizers TODO
 
+
+    // if not found in both volunteers and organizers
+    console.log("Login unsuccessful");
+    (<HTMLInputElement>document.getElementById("displayLogin")).innerHTML = "<span style='color: red;'> Incorrect email or password </span>";
   }
 
-  //Example method to update a volunteer
-  updateJohn(): void {
-
-    var inputValue = (<HTMLInputElement>document.getElementById("nameInput")).value;
-    this.firebase.updateVolunteer("jd3291", inputValue, "Doe", "4234", "123");
-
-  }
 
 }
