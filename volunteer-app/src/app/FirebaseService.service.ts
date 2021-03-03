@@ -74,10 +74,23 @@ export class FirebaseService {
 
   //Add a new volunteer to the database
   createVolunteer(firstName, lastName, email,  password, phoneNumber, dob): void{
+    let randomId = Math.floor((Math.random() * 9000) + 1000);;
+    let userId = firstName.charAt(0).toLowerCase() + lastName.charAt(0).toLowerCase() + randomId;
+    this.db.object("volunteer/" + userId).update({
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phoneNumber,
+      password: password,
+      email: email,
+      dob: dob,
+    });
+  }
+
+  //Add a new volunteer to the database
+  createOrganizer(firstName, lastName, email,  password, phoneNumber, dob): void{
     let randomId = Math.floor((Math.random() * 9999) + 1000);;
     let userId = firstName.charAt(0).toLowerCase() + lastName.charAt(0).toLowerCase() + randomId;
-    console.log("here");
-    this.db.object("volunteer/" + userId).update({
+    this.db.object("organizer/" + userId).update({
       first_name: firstName,
       last_name: lastName,
       phone_number: phoneNumber,
@@ -89,9 +102,9 @@ export class FirebaseService {
 
   //Add a new event to the database
   createEvent(name, category, date, stime, etime, organizer, tasks): void{
-    // let randomId = Math.floor((Math.random() * 9999) + 1000);;
-    // let eventId = name.charAt(0).toLowerCase() + randomId;
-    this.db.list("event/").push({
+     let randomId = Math.floor((Math.random() * 9000) + 1000);;
+     let eventId = name + randomId;
+    this.db.object("event/"+ eventId).update({
       name: name,
       category: category,
       date: date,
@@ -120,41 +133,18 @@ export class FirebaseService {
     return this.events;
   }
 
-  // need to fix
-  getEventsForVolunteer(userid: string) : Observable<any[]> {
-    // var volunteer = this.getVolunteer(userid);
-    this.volunteerEventsRef = this.db.list("event");
-    this.volunteerEvents = this.volunteerEventsRef
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          changes.map((c) => ({ id: c.payload.key, ...c.payload.val() }))
-        )
-      );
-    return this.volunteerEvents;
-  }
-
 
   registerVolunteerEvent(volunteerID, eventList, eventID, volunteerList): boolean {
     this.db.object("event/" + eventID).update({
       volunteers: volunteerList,
     });
-
     return true;
   } 
 
-
-  unregisterVolunteerFromEvent(volunteerid, eventid, eventlist, volunteerlist): boolean {
-
-    this.db.object(`volunteer/${volunteerid}`).update({
-      events: eventlist,
-    });
-
+  unregisterVolunteerFromEvent(eventid, volunteerlist): boolean {
     this.db.object(`event/${eventid}`).update({
       volunteers: volunteerlist
     });
-
     return true;
   }
-
 }
