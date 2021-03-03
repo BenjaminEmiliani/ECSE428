@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireDatabase} from "@angular/fire/database";
 import { FirebaseService } from "../FirebaseService.service";
-import { Observable } from 'rxjs';
 import { Volunteer } from './../model/volunteer';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -44,23 +43,6 @@ export class VolunteerUnregisterEventComponent implements OnInit {
        this.vEventsFor.push(snapshot); 
       });
     });
-
-    
-    // this.firebase.getEventsForVolunteer("sh2327").subscribe(
-    //   (events) => {
-    //     console.log(events.length + " events");
-    //     var lim = (events.length> this.maxOptionsLimit) ? this.maxOptionsLimit : events.length
-    //     for(var i = 0; i < lim; i++) {
-    //       if(events[i].volunteers.contains("sh2327")) {
-    //         this.vEvents.push({
-    //           id: events[i].id, 
-    //           name: events[i].name,
-    //           volunteers: events[i].volunteers,
-    //         })
-    //       }    
-    //     }
-    // });
-
   }
 
 
@@ -79,8 +61,7 @@ export class VolunteerUnregisterEventComponent implements OnInit {
     var vEvents = this.vEventsFor.filter(e => e.id !== "-MUdvkq2gUXFNZs8SgUF");
     const vEventsIds = [];
     vEvents.forEach(e => vEventsIds.push(e.id));
-    console.log(vEventsIds);
-    
+    console.log(vEventsIds); 
   }
 
   unregister(): void {
@@ -89,16 +70,16 @@ export class VolunteerUnregisterEventComponent implements OnInit {
     var eventId = this.unregisterForm.controls.event.value;
 
     // console.log(this.vEventsFor);
-    var vEvents = this.vEventsFor.filter(e => e.id !== eventId);
+    // var vEvents = this.vEventsFor.filter(e => e.id !== eventId);
     
-    if (vEvents === this.vEventsFor) {
-      this.success = false;
-      this.message = "You are not registered to this event!"
-      return;
-    }
+    // if (vEvents === this.vEventsFor) {
+    //   this.success = false;
+    //   this.message = "You are not registered to this event!"
+    //   return;
+    // }
 
-    var vEventsIds = [];
-    vEvents.forEach(e => vEventsIds.push(e.id));
+    // var vEventsIds = [];
+    // vEvents.forEach(e => vEventsIds.push(e.id));
     // console.log(vEventsIds);
 
     var eVolunteers;
@@ -107,7 +88,7 @@ export class VolunteerUnregisterEventComponent implements OnInit {
       eVolunteers = event.volunteers.filter(vId => vId !== this.userId);
       console.log(eVolunteers);
       if (this.success) {
-        this.firebase.unregisterVolunteerFromEvent(this.userId, eventId, vEventsIds, eVolunteers);
+        this.firebase.unregisterVolunteerFromEvent(eventId, eVolunteers);
         this.message = "Successfully unregistered from event!"
       } else {
         this.message = "Error: Unable to unregister from event"

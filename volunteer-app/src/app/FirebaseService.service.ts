@@ -144,11 +144,11 @@ export class FirebaseService {
   } 
 
 
-  unregisterVolunteerFromEvent(volunteerid, eventid, eventlist, volunteerlist): boolean {
+  unregisterVolunteerFromEvent(eventid, volunteerlist): boolean {
 
-    this.db.object(`volunteer/${volunteerid}`).update({
-      events: eventlist,
-    });
+    // this.db.object(`volunteer/${volunteerid}`).update({
+    //   events: eventlist,
+    // });
 
     this.db.object(`event/${eventid}`).update({
       volunteers: volunteerlist
