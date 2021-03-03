@@ -36,7 +36,7 @@ export class VolunteerUnregisterEventComponent implements OnInit {
     });
 
     // get initial volunteer events
-    this.vEventsObservable = this.firebase.getEventsForVolunteer(this.userId);
+    this.vEventsObservable = this.firebase.getEvents();
     this.vEventsObservable.subscribe(snapshots => {
       snapshots.forEach(snapshot => {
         if(snapshot.volunteers.includes(this.userId))
@@ -57,30 +57,10 @@ export class VolunteerUnregisterEventComponent implements OnInit {
     
   }
 
-  test(): void {
-    var vEvents = this.vEventsFor.filter(e => e.id !== "-MUdvkq2gUXFNZs8SgUF");
-    const vEventsIds = [];
-    vEvents.forEach(e => vEventsIds.push(e.id));
-    console.log(vEventsIds); 
-  }
-
   unregister(): void {
     this.success = true;
 
     var eventId = this.unregisterForm.controls.event.value;
-
-    // console.log(this.vEventsFor);
-    // var vEvents = this.vEventsFor.filter(e => e.id !== eventId);
-    
-    // if (vEvents === this.vEventsFor) {
-    //   this.success = false;
-    //   this.message = "You are not registered to this event!"
-    //   return;
-    // }
-
-    // var vEventsIds = [];
-    // vEvents.forEach(e => vEventsIds.push(e.id));
-    // console.log(vEventsIds);
 
     var eVolunteers;
     this.firebase.getEvent(eventId)
