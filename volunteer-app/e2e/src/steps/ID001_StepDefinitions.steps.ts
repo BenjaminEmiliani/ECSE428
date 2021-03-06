@@ -105,12 +105,12 @@ When(/^I enter extra profile details$/, async () => {
   dob.sendKeys("1995-11-20");
   await sleep(1000);
 
-  var major = element(by.id('major'));
+/*  var major = element(by.id('major'));
   major.sendKeys("Software Engineering");
   await sleep(1000);
 
   var year = element(by.id('year'));
-  year.sendKeys("U1");
+  year.sendKeys("U1");*/
 });
 
 
@@ -157,12 +157,12 @@ When(/^I enter no extra profile details$/, async () => {
   dob.sendKeys("");
   await sleep(1000);
 
-  var major = element(by.id('major'));
+ /* var major = element(by.id('major'));
   major.sendKeys("");
   await sleep(1000);
 
   var year = element(by.id('year'));
-  year.sendKeys("");
+  year.sendKeys("");*/
 });
 
 // 3) Scenario: (Error Flow) I don't successfully create a volunteer account because I input an invalid email
