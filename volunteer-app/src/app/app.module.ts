@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
-import { AppRoutingModule} from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
@@ -16,6 +16,7 @@ import { AddEventTasksComponent } from './add-event-tasks/add-event-tasks.compon
 import { VolunteerUnregisterEventComponent } from './volunteer-unregister-event/volunteer-unregister-event.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AssignTaskComponent } from './assign-task/assign-task.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 
 var firebaseConfig = {
@@ -43,7 +44,8 @@ var firebaseConfig = {
     VolunteerUnregisterEventComponent,
     HomepageComponent,
     AssignTaskComponent,
-    AddEventTasksComponent
+    AddEventTasksComponent,
+    UpdateUserComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
