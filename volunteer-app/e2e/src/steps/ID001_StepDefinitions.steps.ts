@@ -105,7 +105,7 @@ When(/^I enter extra profile details$/, async () => {
   dob.sendKeys("1995-11-20");
   await sleep(1000);
 
-/*  var major = element(by.id('major'));
+/*  var major = element(by.id('major')); //Commented this because it made errores: no 'major' element
   major.sendKeys("Software Engineering");
   await sleep(1000);
 
@@ -157,7 +157,7 @@ When(/^I enter no extra profile details$/, async () => {
   dob.sendKeys("");
   await sleep(1000);
 
- /* var major = element(by.id('major'));
+ /* var major = element(by.id('major')); //Same reason for these too, as the previous one
   major.sendKeys("");
   await sleep(1000);
 
