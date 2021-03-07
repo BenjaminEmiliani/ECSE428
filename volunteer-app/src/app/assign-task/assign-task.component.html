@@ -9,7 +9,7 @@
         <div id="required-volunter-id" *ngIf="submitted && !assignForm.controls.volunteer?.valid" style="font-size:smaller;color:red">*required</div>
     </div>
     <div>
-        <select id='event-id' formControlName="event" style="padding:3px; margin:5px; min-width:10%">
+        <select id='event-id' formControlName="event" (change)='update()'> tyle="padding:3px; margin:5px; min-width:10%">
             <option [ngValue]="null" disabled>Select Event</option>
             <option *ngFor="let event of events" [ngValue]="event.id"> {{ event.name }} (ID={{ event.id }})</option>
             <option id="test-event" value="null"> Test Event</option>
@@ -19,13 +19,10 @@
     <div>
         <select id='task-id' formControlName="task" style="padding:3px; margin:5px; min-width:10%">
             <option [ngValue]="null" disabled>Select Event</option>
-            <option *ngFor="let task of tasks" [ngValue]="event.id"> {{ task.name }} (ID={{ task.id }})</option>
-            <option id="test-event" value="null"> Test Task</option>
+            <option *ngFor="let task of tasks" [ngValue]="task.id"> {{ task.name }}</option>
         </select>
         <div id="required-task-id" *ngIf="submitted && !assignForm.controls.task?.valid" style="font-size:smaller;color:red">*required</div>
     </div>
-    
-    
     <button id='submit-button' type="submit" style="padding:3px; margin:5px">Register for Task</button>
     <div id="message" *ngIf="submitted && !success" style="font-size:smaller;color:red">{{message}}</div>
     <div id="success-message" *ngIf="submitted && success" style="font-size:smaller;color:green">{{message}}</div>
