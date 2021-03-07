@@ -29,7 +29,7 @@ Given(/^I am on the update user info page$/, async () => {
   return browser.get(browser.baseUrl + "/update-user");
 });
 
-When(/^I provide a new valid email$/, async () => {
+When(/^I provide a new valid email to change$/, async () => {
     var emailAddress = element(by.id('updateEmail'));
     emailAddress.sendKeys("diehard2@gmail.com");
 });

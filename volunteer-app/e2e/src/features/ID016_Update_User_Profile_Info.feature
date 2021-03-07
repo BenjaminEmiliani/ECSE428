@@ -3,7 +3,7 @@ Feature: Update user/profile information
 Scenario: Update name and email (Normal Flow)
      
 Given I am on the update user info page
-When I provide a new valid email
+When I provide a new valid email to change
 And I provide a new first name and last name
 And I click the update email and update name buttons
 Then my email and names are updated
