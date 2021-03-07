@@ -1,10 +1,16 @@
 Feature: Volunteer unregisters from event
-As a Volunteer, I want to be able to unregister from an event 
-so that I would be able to change my plans.
+  As a Volunteer, I want to be able to unregister from an event
+  so that I would be able to change my plans.
 
+  Background:
+    Given I am logged in as a Volunteer
 
-Scenario: Attempt to unregister from event without selecting one (Error Flow)
+  Scenario: Unregister volunteer from event (Normal Flow)
+    When I select myself for registration
+    When I select Science Fair for registration
+    When I request to unregister the event
+    Then I wont be registered to the event
 
-Given I am logged in as a Volunteer
-When I request to unregister without selecting an event
-Then an error message is issued
+  Scenario: Attempt to unregister from event without selecting one (Error Flow)
+    When I request to unregister without selecting an event
+    Then an error message is issued
