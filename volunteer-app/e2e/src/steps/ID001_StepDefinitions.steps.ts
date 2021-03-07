@@ -104,7 +104,7 @@ When(/^I enter extra profile details$/, async () => {
   var dob = element(by.id('dob'));
   dob.sendKeys("1995-11-20");
   await sleep(1000);
-
+  
 });
 
 
@@ -150,6 +150,7 @@ When(/^I enter no extra profile details$/, async () => {
   var dob = element(by.id('dob'));
   dob.sendKeys("");
   await sleep(1000);
+
 
 });
 
