@@ -2,19 +2,12 @@ import { Before, Given, Then, When, And } from 'cucumber';
 import { expect, assert } from 'chai';
 import { AppPage } from '../app.po';
 import { browser, by, element, protractor } from 'protractor';
-import { Selector } from 'testcafe';
-
 
 
 let page: AppPage;
 let email = "sh@gmail.com";
 let password = "abcd1234";
 
-var volSelect;
-var volOption;
-
-var eventSelect;
-var eventOption;
 
 Before(() => {
   page = new AppPage();
