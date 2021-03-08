@@ -13,7 +13,7 @@ export class CreateEventComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   createdEvent = false;
-
+  //for the video
   constructor(private db: AngularFireDatabase, private firebase: FirebaseService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
