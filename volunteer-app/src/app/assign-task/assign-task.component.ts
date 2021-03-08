@@ -25,14 +25,15 @@ export class AssignTaskComponent implements OnInit {
 
     this.assignForm = this.formBuilder.group({
       volunteer: [null, Validators.required],
-      event: [null, [Validators.required ]]
+      event: [null, [Validators.required ]],
+      task: [null, [Validators.required]]
     });
 
-    this.volunteers = []
+    this.volunteers = [];
+
     this.firebase.getVolunteers().subscribe(
       (volunteers) => {
      //   console.log(volunteers)
-        console.log(volunteers.length + " volunteers");
         var lim = (volunteers.length> this.maxOptionsLimit) ? this.maxOptionsLimit : volunteers.length
         for(var i=0; i<lim; i++){
           this.volunteers.push({
@@ -44,24 +45,69 @@ export class AssignTaskComponent implements OnInit {
     });
 
     this.events = [];
-    /*this.firebase.getEvents().subscribe(
+
+    this.firebase.getEvents().subscribe(
       (events) => {
-     //   console.log(events)
-        console.log(events.length + " events");
         var lim = (events.length> this.maxOptionsLimit) ? this.maxOptionsLimit : events.length
         for(var i=0; i<lim; i++){
           this.events.push({
             id: events[i].id, 
             name: events[i].name,
-            volunteers: events[i].volunteers,
+            tasks: events[i].tasks,
+            volunteers: events[i].volunteers
           })
         }
-    });*/
+    });
+
+    console.log(this.tasks);
     
   }
 
   submit(): void{
+    var eventID = this.assignForm.controls.event.value;
+    var taskID = this.assignForm.controls.task.value;
+    var volunteerID = this.assignForm.controls.volunteer.value;
+    var currentVolunteers;
+    this.tasks.forEach(item => {
+
+      if(item.id.match(taskID)){
+        currentVolunteers = item.volunteer;
+        //if no event has no task then create new task array
+        if(currentVolunteers == undefined){
+          currentVolunteers =  new Array();
+        }
+
+        currentVolunteers.push(volunteerID);
+      }  
+
+    });
+
+    this.firebase.assignVolunteerToTask(eventID, taskID, currentVolunteers);
 
   }
+
+  update(): void {
+    if (this.assignForm.controls.event.value != null) {
+      var eventId = this.assignForm.controls.event.value;
+
+      //find the tasks of the event selected and append the new task
+      this.firebase.getTasks(eventId).subscribe(
+        (tasks) => {
+          var lim = (tasks.length> this.maxOptionsLimit) ? this.maxOptionsLimit : tasks.length
+          for(var i=0; i<lim; i++){
+            this.tasks.push({
+              id: tasks[i].id, 
+              name: tasks[i].name,
+              volunteer: tasks[i].volunteer,
+            })
+          }
+      });
+
+    } else {
+      this.tasks = [];
+    }
+
+  }
+
 
 }
