@@ -12,7 +12,7 @@ import { UpdateUserComponent } from './update-user/update-user.component'
 const routes: Routes = [
   { path: 'create-event', component: CreateEventComponent },
   { path: 'event-registration', component: EventRegistrationComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent},
   { path: 'signup-volunteer', component: CreateVolunteerComponent },
   { path: 'signup-organiser', component: CreateOrganizerComponent },
   { path: 'volunteer-unregister-event', component: VolunteerUnregisterEventComponent },

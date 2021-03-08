@@ -1,6 +1,6 @@
 <h2>Add Event tasks</h2>
 
-<form [formGroup]="registerForm" (ngSubmit)="addTask()">
+<form [formGroup]="registerForm" (ngSubmit)="addTask()" class="form-container">
     <div>
         <select id='eventtask-id' formControlName="eventtask" style="padding:3px; margin:5px; min-width:10%">
             <option [ngValue]="null" disabled>Select Event</option>
