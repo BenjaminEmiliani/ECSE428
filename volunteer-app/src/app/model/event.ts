@@ -1,6 +1,7 @@
 import { Time } from "@angular/common";
 import { Organizer } from './organizer';
 import { Task } from './task';
+import { AssignedTaskVolunteer } from "./assignedTaskVolunteer";
 import { Volunteer } from './volunteer';
 
 export class Event {
@@ -12,4 +13,5 @@ export class Event {
   public volunteers: Volunteer[];
   public tasks: Task[];
   public organizer: Organizer;
+  public assignedTaskVolunteer: AssignedTaskVolunteer[];
 }

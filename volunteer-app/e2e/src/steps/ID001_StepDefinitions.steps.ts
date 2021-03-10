@@ -38,7 +38,7 @@ Before(async () => {
     }, volunteerID);
   }
 
-  await sleep(1000);
+  await sleep(500);
 
   var volunteerExists = await browser.executeScript(function () {
     const url = 'https://ecse428-5c703-default-rtdb.firebaseio.com/volunteer.json?orderBy=\"first_name\"&equalTo=\"' + "Elon" + '\"';
@@ -69,7 +69,7 @@ Before(async () => {
     }, volunteerID);
   }
 
-  await sleep(700);
+  await sleep(500);
 });
 
 
@@ -81,15 +81,15 @@ Given(/^I am on volunteer signup page$/, async () => {
 When(/^I enter my email, password, first name, last name$/, async () => {
   var firstName = element(by.id('firstName'));
   firstName.sendKeys("Harry");
-  await sleep(1000);
+  await sleep(700);
 
   var lastName = element(by.id('lastName'));
   lastName.sendKeys("Potter");
-  await sleep(1000);
+  await sleep(700);
 
   var emailAddress = element(by.id('emailAddress'));
   emailAddress.sendKeys("harry.pot@gmail.com");
-  await sleep(1000);
+  await sleep(700);
 
   var password = element(by.id('password'));
   password.sendKeys("1234abcd");
@@ -104,18 +104,12 @@ When(/^I enter extra profile details$/, async () => {
   var dob = element(by.id('dob'));
   dob.sendKeys("1995-11-20");
   await sleep(1000);
-
-  var major = element(by.id('major'));
-  major.sendKeys("Software Engineering");
-  await sleep(1000);
-
-  var year = element(by.id('year'));
-  year.sendKeys("U1");
+  
 });
 
 
 When(/^I request to create volunteer account$/, async () => {
-  await sleep(1000);
+  await sleep(700);
   var signup_btn = element(by.css(".signup-volunteer-btn"));
   browser.sleep(500);
   signup_btn.click();
@@ -123,7 +117,7 @@ When(/^I request to create volunteer account$/, async () => {
 
 
 Then(/^the system indicates that the volunteer account has been successfully created$/, async () => {
-  await sleep(1000);
+  await sleep(500);
   expect(await element(by.id('display')).getText()).to.equal('Acount Successfully Created');
 });
 
@@ -157,12 +151,7 @@ When(/^I enter no extra profile details$/, async () => {
   dob.sendKeys("");
   await sleep(1000);
 
-  var major = element(by.id('major'));
-  major.sendKeys("");
-  await sleep(1000);
 
-  var year = element(by.id('year'));
-  year.sendKeys("");
 });
 
 // 3) Scenario: (Error Flow) I don't successfully create a volunteer account because I input an invalid email
