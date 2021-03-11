@@ -33,24 +33,24 @@ Given(/^I am logged in as a Volunteer$/, async () => {
 
 
 When(/^I select myself for registration$/, async () => {
-  // element(by.cssContainingText('option', 'sami hilal')).click();
+  element(by.cssContainingText('option', 'sami hilal')).click();
 });
 
 
 When(/^I select Science Fair for registration$/, async () => {
-  // element(by.cssContainingText('option', 'ScienceFair')).click();
-  // var registerBtn = element(by.id('submit-button'));
-  // await registerBtn.click();
-  // await sleep(1000);
+  element(by.cssContainingText('option', 'ScienceFair')).click();
+  var registerBtn = element(by.id('submit-button'));
+  await registerBtn.click();
+  await sleep(1000);
 });
 
 
 When(/^I request to unregister the event$/, async () => {
-  // browser.navigate().refresh();
-  // element(by.id('unreg-event-id')).element(by.cssContainingText('option', 'ScienceFair')).click();
-  // var unregisterBtn = element(by.id('unreg-submit-button'));
-  // await unregisterBtn.click();
-  // await sleep(1000);
+  browser.navigate().refresh();
+  element(by.id('unreg-event-id')).element(by.cssContainingText('option', 'ScienceFair')).click();
+  var unregisterBtn = element(by.id('unreg-submit-button'));
+  await unregisterBtn.click();
+  await sleep(1000);
 });
 
 Then(/^I wont be registered to the event$/, async () => {
@@ -68,12 +68,12 @@ Then(/^I wont be registered to the event$/, async () => {
 });
 
 When(/^I request to unregister without selecting an event$/, async () => {
-  // var unregisterBtn = element(by.xpath('/html/body/app-root/app-homepage/app-volunteer-unregister-event/form/button'));
-  // await unregisterBtn.click();
-  // await sleep(1000);
+  var unregisterBtn = element(by.xpath('/html/body/app-root/app-homepage/app-volunteer-unregister-event/form/button'));
+  await unregisterBtn.click();
+  await sleep(1000);
 });
 
 Then(/^an error message is issued$/, async () => {
-  // var errormsg = await element(by.xpath('/html/body/app-root/app-homepage/app-volunteer-unregister-event/form/div[1]/div')).getText();
-  // expect("*required").to.equal(errormsg);
+  var errormsg = await element(by.xpath('/html/body/app-root/app-homepage/app-volunteer-unregister-event/form/div[1]/div')).getText();
+  expect("*required").to.equal(errormsg);
 });
