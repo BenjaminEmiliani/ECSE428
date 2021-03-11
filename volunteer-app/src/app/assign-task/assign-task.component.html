@@ -1,6 +1,6 @@
 <p>assign-task works</p>
 
-<form [formGroup]="assignForm" (ngSubmit)="submit()">
+<form [formGroup]="assignForm" (ngSubmit)="submit()" class="form-container">
     <div>
         <select id='volunteer-id' formControlName="volunteer" style="padding:3px; margin:5px; min-width:10%">
             <option [ngValue]="null" disabled>Select Volunteer</option>

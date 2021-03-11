@@ -1,6 +1,7 @@
-<h3>Register to Volunteer at an Event</h3>
+<h2>Register to Volunteer at an Event</h2>
 
-<form [formGroup]="registerForm" (ngSubmit)="submit()">
+<form [formGroup]="registerForm" (ngSubmit)="submit()" class="form-container">
+    <h2>Register for Event</h2>
     <div>
         <select id='volunteer-id' formControlName="volunteer" style="padding:3px; margin:5px; min-width:10%">
             <option [ngValue]="null" disabled>Select Volunteer</option>
@@ -23,9 +24,3 @@
     <div id="message" *ngIf="submitted && !success" style="font-size:smaller;color:red">{{message}}</div>
     <div id="success-message" *ngIf="submitted && success" style="font-size:smaller;color:green">{{message}}</div>
 </form>
-
-<!--<button (click)="test()" style="padding:3px; margin:5px">Test Button</button> -->
-
-<nav>
-    <a routerLink="">Return to homepage</a>
-</nav>
