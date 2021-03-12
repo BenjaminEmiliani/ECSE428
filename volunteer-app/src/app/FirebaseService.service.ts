@@ -14,6 +14,8 @@ export class FirebaseService {
 
   volunteerRef: AngularFireList<any>;
   volunteers: Observable<any[]>;
+  organizerRef: AngularFireList<any>;
+  organizers: Observable<any[]>;
   eventRef: AngularFireList<any>;
   events: Observable<any[]>;
   volunteerEventsRef: AngularFireList<any>;
@@ -40,6 +42,18 @@ export class FirebaseService {
         )
       );
     return this.volunteers;
+  }
+
+  getOrganizers(): Observable<any[]> {
+    this.organizerRef = this.db.list("organizer");
+    this.organizers = this.organizerRef
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ id: c.payload.key, ...c.payload.val() }))
+        )
+      );
+    return this.organizers;
   }
 
   //Return a volunteer in firebase db using its userId
@@ -130,6 +144,10 @@ export class FirebaseService {
       tasks: [],
       volunteers: []
     });
+  }
+
+  deleteEvent(eid): void {
+    this.db.object("event/" + eid).remove();
   }
 
   getEvent(eid): Observable<any> {

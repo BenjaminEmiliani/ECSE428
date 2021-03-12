@@ -17,6 +17,7 @@ import { VolunteerUnregisterEventComponent } from './volunteer-unregister-event/
 import { HomepageComponent } from './homepage/homepage.component';
 import { AssignTaskComponent } from './assign-task/assign-task.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { DeleteEventComponent } from './delete-event/delete-event.component';
 
 
 var firebaseConfig = {
@@ -45,7 +46,8 @@ var firebaseConfig = {
     HomepageComponent,
     AssignTaskComponent,
     AddEventTasksComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    DeleteEventComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
