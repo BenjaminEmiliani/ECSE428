@@ -7,7 +7,8 @@ import { EventRegistrationComponent } from './event-registration/event-registrat
 import { VolunteerUnregisterEventComponent } from './volunteer-unregister-event/volunteer-unregister-event.component'
 import { HomepageComponent } from './homepage/homepage.component';
 import { CreateOrganizerComponent } from './create-organizer/create-organizer.component';
-import { UpdateUserComponent } from './update-user/update-user.component'
+import { UpdateUserComponent } from './update-user/update-user.component';
+import {DeleteEventComponent} from './delete-event/delete-event.component';
 
 const routes: Routes = [
   { path: 'create-event', component: CreateEventComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'signup-organiser', component: CreateOrganizerComponent },
   { path: 'volunteer-unregister-event', component: VolunteerUnregisterEventComponent },
   { path: 'homepage', component: HomepageComponent },
-  { path: 'update-user', component: UpdateUserComponent }
+  { path: 'update-user', component: UpdateUserComponent },
+  {path: 'delete-event', component: DeleteEventComponent}
 ];
 
 @NgModule({
